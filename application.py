@@ -41,7 +41,7 @@ define("mysql_password", default = "zgeek", help = "community database password"
 class Application(tornado.web.Application):
     def __init__(self):
         settings = dict(
-            blog_title = u"F2E Community",
+            blog_title = u"ZGEEK",
             template_path = os.path.join(os.path.dirname(__file__), "templates"),
             static_path = os.path.join(os.path.dirname(__file__), "static"),
             xsrf_cookies = True,
@@ -50,6 +50,7 @@ class Application(tornado.web.Application):
             autoescape = None,
             jinja2 = Environment(loader = FileSystemLoader(os.path.join(os.path.dirname(__file__), "templates")), trim_blocks = True),
             reserved = ["user", "topic", "home", "setting", "forgot", "login", "logout", "register", "admin"],
+            debug=True,
         )
 
         handlers = [
