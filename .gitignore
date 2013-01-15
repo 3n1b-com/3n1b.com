@@ -44,3 +44,8 @@ env/
 *.swp
 *.sccsc
 *~
+
+# avatar
+static/avatar/b_8ffec35f-18c3-524d-90fd-f2fb36ce4206.png
+static/avatar/m_8ffec35f-18c3-524d-90fd-f2fb36ce4206.png
+static/avatar/s_8ffec35f-18c3-524d-90fd-f2fb36ce4206.png
