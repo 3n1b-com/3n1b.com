@@ -12,7 +12,20 @@
     </ul>
     #}
 
+    
+
     <div class="topics container-box deprecated-mt10">
+        <div class="subnav">
+        <ul class="nav nav-pills">
+            <li><a href='/'>所有主题</a></li>
+            <li><a href='/members'>我的学校</a></li>
+            <li><a href="#fluidGridSystem">兴趣节点</a></li>
+            <li><a href="#gridCustomization">关注的人</a></li>
+            <li><a href="#layouts">我的主页</a></li>
+            <li><a href="#responsive">精彩主题</a></li>
+        </ul>
+    </div>
+
         {% for topic in topics.list %}
             <div class="topic-item">
                 <a href="/u/{{ topic.author_username }}">
@@ -111,14 +124,6 @@
         </div>
     {% endif %}
 
-    <div class="sidebox container-box mt10">
-        <div class="ui-header">
-            <span class="title">微信公共帐号</span>
-        </div>
-        <div class="ui-content">
-            <img src="/static/images/qrcode_for_gh_81ac76ebf8e3_258.jpg" alt="" />
-        </div>
-    </div>
 
     <div class="sidebox container-box mt10 hot-nodes">
         <div class="ui-header">
@@ -128,6 +133,16 @@
             {% for node in hot_nodes %}
                 <a href="/node/{{ node.slug }}">{{ node.name }}</a>
             {% endfor %}
+        </div>
+    </div>
+
+    {# 暂时注释
+    <div class="sidebox container-box mt10">
+        <div class="ui-header">
+            <span class="title">微信公共帐号</span>
+        </div>
+        <div class="ui-content">
+            <img src="/static/images/qrcode_for_gh_81ac76ebf8e3_258.jpg" alt="" />
         </div>
     </div>
 
@@ -149,6 +164,7 @@
             <p><a href="http://f2e.im"><img src="/static/images/f2e.im.logo.png" alt="" /></a></p>
         </div>
     </div>
+    #}
 
     <div class="sidebox container-box mt10 community-status">
         <div class="ui-header">
