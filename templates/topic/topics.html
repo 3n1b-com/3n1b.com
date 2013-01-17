@@ -13,11 +13,22 @@
     #}
 
     <div class="subnav">
+
+        {% set tab_bar = [
+                    ('/', 'topic', '中国传媒大学'),
+                    ('/', '', '关注节点'),
+                    ('/follows', 'follows', '关注的人'),
+                    ('/topics', 'topics', '所有话题'),
+                ] -%}
+
+                {% set active_page = active_page|default('index') -%}
+
           <ul class="nav nav-pills">
-            <li class="active"><a href="/">中国传媒大学</a></li>
-            <li><a href="/members">关注节点</a></li>
-            <li><a href="#fluidGridSystem">关注的人</a></li>
-            <li><a href="#gridCustomization">所有话题</a></li>
+            {% for href, id, caption in tab_bar %}
+                        <li{% if id == active_page %} class="active"{% endif %}>
+                            <a href="{{ href|e }}">{{ caption|e }}</a>
+                        </li>
+                    {% endfor %}
           </ul>
         </div>
 
