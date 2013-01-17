@@ -12,6 +12,15 @@
     </ul>
     #}
 
+    <div class="subnav">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="/">中国传媒大学</a></li>
+            <li><a href="/members">关注节点</a></li>
+            <li><a href="#fluidGridSystem">关注的人</a></li>
+            <li><a href="#gridCustomization">所有话题</a></li>
+          </ul>
+        </div>
+
     <div class="topics container-box deprecated-mt10">
         {% for topic in topics.list %}
             <div class="topic-item">
@@ -81,7 +90,7 @@
             </div>
             <div class="ui-content">
                 <div class="status status-topic">
-                    <strong><a href="/u/{{ user_info.username }}/topics">{{ user_info.counter.topics }}</a></strong> 主题
+                    <strong><a href="/u/{{ user_info.username }}/topics">{{ user_info.counter.topics }}</a></strong> 话题
                 </div>
                 <div class="status status-reply">
                     <strong><a href="/u/{{ user_info.username }}/replies">{{ user_info.counter.replies }}</a></strong> 回复
@@ -111,15 +120,6 @@
         </div>
     {% endif %}
 
-    <div class="sidebox container-box mt10">
-        <div class="ui-header">
-            <span class="title">微信公共帐号</span>
-        </div>
-        <div class="ui-content">
-            <img src="/static/images/qrcode_for_gh_81ac76ebf8e3_258.jpg" alt="" />
-        </div>
-    </div>
-
     <div class="sidebox container-box mt10 hot-nodes">
         <div class="ui-header">
             <span class="title">最热节点</span>
@@ -128,6 +128,16 @@
             {% for node in hot_nodes %}
                 <a href="/node/{{ node.slug }}">{{ node.name }}</a>
             {% endfor %}
+        </div>
+    </div>
+
+    {#
+    <div class="sidebox container-box mt10">
+        <div class="ui-header">
+            <span class="title">微信公共帐号</span>
+        </div>
+        <div class="ui-content">
+            <img src="/static/images/qrcode_for_gh_81ac76ebf8e3_258.jpg" alt="" />
         </div>
     </div>
 
@@ -149,6 +159,7 @@
             <p><a href="http://f2e.im"><img src="/static/images/f2e.im.logo.png" alt="" /></a></p>
         </div>
     </div>
+    #}
 
     <div class="sidebox container-box mt10 community-status">
         <div class="ui-header">

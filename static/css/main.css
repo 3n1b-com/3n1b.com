@@ -443,6 +443,23 @@ a.btn-small {
       color: #666;
       text-overflow: ellipsis; }
 
+.subnav {
+height: 36px;
+background-color: #eeeeee;
+background-repeat: repeat-x;
+background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#eeeeee));
+background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
+background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
+background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 );
+background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
+border: 1px solid #e5e5e5;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+
 .topics {
   padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -557,7 +574,8 @@ a.btn-small {
       height: 48px; }
     .usercard .ui-header .username, .user-page .profile .ui-header .username {
       font-size: 18px;
-      font-weight: bold; }
+      font-weight: bold; 
+      color: #a5a5a5;}
     .usercard .ui-header .website a, .user-page .profile .ui-header .website a {
       color: #fff; }
   .usercard .ui-content .status, .user-page .profile .ui-content .status {
