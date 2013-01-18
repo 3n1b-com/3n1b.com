@@ -16,9 +16,9 @@
 
         {% set tab_bar = [
                     ('/', 'topic', '中国传媒大学'),
-                    ('/', '', '关注节点'),
-                    ('/follows', 'follows', '关注的人'),
-                    ('/topics', 'topics', '所有话题'),
+                    ('/', '', '所有大学'),
+                    ('/groups', 'groups', '兴趣小组'),
+                    ('/follows', 'follows', '关注的人'),                  
                 ] -%}
 
                 {% set active_page = active_page|default('index') -%}
@@ -73,7 +73,7 @@
     </div>
 
     <div class="nodes-cloud container-box mt10">
-        <h4 class="title">F2E / 常见节点导航</h4>
+        <h4 class="title">热门导航</h4>
         <ul>
             {% for plane in planes %}
                 <li>
@@ -133,7 +133,7 @@
 
     <div class="sidebox container-box mt10 hot-nodes">
         <div class="ui-header">
-            <span class="title">最热节点</span>
+            <span class="title">最热小组</span>
         </div>
         <div class="ui-content">
             {% for node in hot_nodes %}
@@ -182,11 +182,11 @@
                 <dd>{{ status_counter.users }}</dd>
             </dl>
             <dl>
-                <dt>结点</dt>
+                <dt>小组</dt>
                 <dd>{{ status_counter.nodes }}</dd>
             </dl>
             <dl>
-                <dt>主题</dt>
+                <dt>话题</dt>
                 <dd>{{ status_counter.topics }}</dd>
             </dl>
             <dl>
