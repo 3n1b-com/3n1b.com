@@ -46,34 +46,27 @@
         });
     </script>
     #}
-
-    
-
-
-
 </head>
 <body padding-top: 60px;>
-    
-<div class="navbar  navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="/">叁年壹班</a>
 
-            <!--/.nav-collapse -->
-            <form class="navbar-search pull-left">
-  <input type="text" class="search-query" placeholder="Search">
-</form>
+    <div class="navbar  navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/">叁年壹班</a>
 
-            <div class="nav-collapse collapse">
-            
-                {% set navigation_bar = [
+                <!--/.nav-collapse -->
+                <form class="navbar-search pull-left">
+                    <input type="text" class="search-query" placeholder="Search"></form>
+
+                <div class="nav-collapse collapse">
+                    {% set navigation_bar = [
                     ('/', 'topic', '社区'),
                     ('/members', 'members', '成员'),
                     ('/', 'groups', '小组'),
@@ -83,44 +76,45 @@
                 ] -%}
 
                 {% set active_page = active_page|default('index') -%}
-                
-                <ul class="nav">
-                    {% for href, id, caption in navigation_bar %}
+                    <ul class="nav">
+                        {% for href, id, caption in navigation_bar %}
                         <li{% if id == active_page %} class="active"{% endif %}>
                             <a href="{{ href|e }}">{{ caption|e }}</a>
                         </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            
-            <div class="nav-collapse collapse pull-right">
-                <ul class="nav">
-                    {% if current_user %}
-                        <li><a href="/setting">{{ current_user.username }}</a></li>
-                        <li><a href="/logout">退出</a></li>
-                    {% else %}
-                        <li><a href="/login">登录</a></li>
-                        <li><a href="/register">注册</a></li>
-                    {% endif %}
-                </ul>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="nav-collapse collapse pull-right">
+                    <ul class="nav">
+                        {% if current_user %}
+                        <li>
+                            <a href="/setting">{{ current_user.username }}</a>
+                        </li>
+                        <li>
+                            <a href="/logout">退出</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="/login">登录</a>
+                        </li>
+                        <li>
+                            <a href="/register">注册</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container-fluid container mt15">
-    <div class="row-fluid">
-        <div class="span9 left">
-            {% block main %}{% endblock %}
-        </div>
+    <div class="container-fluid container mt15">
+        <div class="row-fluid">
+            <div class="span9 left">{% block main %}{% endblock %}</div>
 
-        <div class="span3 right">
-            {% block sidebar %}{% endblock %}
+            <div class="span3 right">{% block sidebar %}{% endblock %}</div>
         </div>
     </div>
-</div>
-
-{% include "snippet/footer.html" %}
-
+    {% include "snippet/footer.html" %}
 </body>
 </html>

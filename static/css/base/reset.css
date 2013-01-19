@@ -8,10 +8,7 @@ http://yuilibrary.com/license/
 	TODO will need to remove settings on HTML since we can't namespace it.
 	TODO with the prefix, should I group by selector or property for weight savings?
 */
-html{
-	color:#000;
-	background:#FFF;
-}
+html{ color:#000; background:#FFF; }
 /*
 	TODO remove settings on BODY since we can't namespace it.
 */
@@ -43,18 +40,10 @@ textarea,
 p,
 blockquote,
 th,
-td {
-	margin:0;
-	padding:0;
-}
-table {
-	border-collapse:collapse;
-	border-spacing:0;
-}
+td { margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
 fieldset,
-img {
-	border:0;
-}
+img { border:0; }
 /*
 	TODO think about hanlding inheritence differently, maybe letting IE6 fail a bit...
 */
@@ -66,59 +55,32 @@ dfn,
 em,
 strong,
 th,
-var {
-	font-style:normal;
-	font-weight:normal;
-}
+var { font-style:normal; font-weight:normal; }
 
 ol,
-ul {
-	list-style:none;
-}
+ul { list-style:none; }
 
 caption,
-th {
-	text-align:left;
-}
+th { text-align:left; }
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-	font-size:100%;
-	font-weight:normal;
-}
+h6 { font-size:100%; font-weight:normal; }
 q:before,
-q:after {
-	content:'';
-}
+q:after { content:''; }
 abbr,
-acronym {
-	border:0;
-	font-variant:normal;
-}
+acronym { border:0; font-variant:normal; }
 /* to preserve line-height and selector appearance */
-sup {
-	vertical-align:text-top;
-}
-sub {
-	vertical-align:text-bottom;
-}
+sup { vertical-align:text-top; }
+sub { vertical-align:text-bottom; }
 input,
 textarea,
-select {
-	font-family:inherit;
-	font-size:inherit;
-	font-weight:inherit;
-}
+select { font-family:inherit; font-size:inherit; font-weight:inherit; }
 /*to enable resizing for IE*/
 input,
 textarea,
-select {
-	*font-size:100%;
-}
+select { *font-size:100%; }
 /*because legend doesn't inherit in IE */
-legend {
-	color:#000;
-}
+legend { color:#000; }
