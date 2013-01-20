@@ -124,9 +124,9 @@ class SettingAvatarHandler(BaseHandler):
         avatar_96x96 = avatar.resize((96, 96), Image.ANTIALIAS)
         avatar_48x48 = avatar.resize((48, 48), Image.ANTIALIAS)
         avatar_32x32 = avatar.resize((32, 32), Image.ANTIALIAS)
-        avatar_96x96.save("./static/avatar/b_%s.png" % avatar_name, "PNG")
-        avatar_48x48.save("./static/avatar/m_%s.png" % avatar_name, "PNG")
-        avatar_32x32.save("./static/avatar/s_%s.png" % avatar_name, "PNG")
+        avatar_96x96.save("/srv/www/3n1b.com/static/avatar/b_%s.png" % avatar_name, "PNG")
+        avatar_48x48.save("/srv/www/3n1b.com/static/avatar/m_%s.png" % avatar_name, "PNG")
+        avatar_32x32.save("/srv/www/3n1b.com/static/avatar/s_%s.png" % avatar_name, "PNG")
         result = self.user_model.set_user_avatar_by_uid(user_id, "%s.png" % avatar_name)
         template_variables["success_message"] = [u"用户头像更新成功"]
         # update `updated`
@@ -143,9 +143,9 @@ class SettingAvatarFromGravatarHandler(BaseHandler):
         avatar_96x96 = gravatar.get_image(size = 96, filetype_extension = False)
         avatar_48x48 = gravatar.get_image(size = 48, filetype_extension = False)
         avatar_32x32 = gravatar.get_image(size = 32, filetype_extension = False)
-        urllib.urlretrieve(avatar_96x96, "./static/avatar/b_%s.png" % avatar_name)
-        urllib.urlretrieve(avatar_48x48, "./static/avatar/m_%s.png" % avatar_name)
-        urllib.urlretrieve(avatar_32x32, "./static/avatar/s_%s.png" % avatar_name)
+        urllib.urlretrieve(avatar_96x96, "/srv/www/3n1b.com/static/avatar/b_%s.png" % avatar_name)
+        urllib.urlretrieve(avatar_48x48, "/srv/www/3n1b.com/static/avatar/m_%s.png" % avatar_name)
+        urllib.urlretrieve(avatar_32x32, "/srv/www/3n1b.com/static/avatar/s_%s.png" % avatar_name)
         result = self.user_model.set_user_avatar_by_uid(user_id, "%s.png" % avatar_name)
         template_variables["success_message"] = [u"用户头像更新成功"]
         # update `updated`

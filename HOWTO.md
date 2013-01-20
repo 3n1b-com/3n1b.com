@@ -17,12 +17,40 @@ HOWTO deploy on Linode
 	$ apt-get install nginx 
 	$ pip install supervisor 
 
+###Config Git
+	$ ssh-keygen -t rsa -C "3n1b.com@gmail.com"
+	$ cat ~/.ssh/id_rsa.pub
+	# copy and paste the RSA key to the Deploy keys setting
+	$ git config --global user.name "3n1b.com"  
+	$ git config --global user.email 3n1b.com@gmail.com  
+
 ###Make directories for your app
 	$ mkdir /srv/www
 
 ###Pull in source code
 	$ cd /srv/www/
 	$ git clone git@github.com:gaolinjie/3n1b.com.git
+	$ cd 3n1b.com
+
+###Install web app required modules
+	$ pip install -r requirements.txt
+
+###Install python mysql
+	$ easy_install -U distribute
+	$ apt-get install libmysqld-dev libmysqlclient-dev
+	$ pip install mysql-python
+	$ apt-get install python-MySQLdb
+
+###Install PIL
+	$ sudo apt-get build-dep python-imaging 
+	$ pip install http://effbot.org/downloads/Imaging-1.1.7.tar.gz
+
+###Create database and then execute sql file in dbstructure/
+	$ mysql -u root -p
+	mysql> CREATE DATABASE 3n1b;
+	mysql> GRANT ALL PRIVILEGES ON 3n1b.* TO '3n1b'@'localhost' IDENTIFIED BY '3n1b';
+	mysql> exit
+	$ mysql -u 3n1b -p --database=3n1b < dbstructure/3n1b.sql
 
 ###Create symbolic links to conf files
 	$ cd /etc/nginx 
@@ -41,7 +69,7 @@ HOWTO deploy on Linode
 	$ supervisord
 	$ /etc/init.d/nginx start
 
-###Visit your public IP address.
+###Visit your public IP address and enjoy!
 
 ###Update your web app
 	$ cd /srv/www/3n1b.com
