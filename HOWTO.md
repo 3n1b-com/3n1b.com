@@ -13,37 +13,36 @@ HOWTO deploy on Linode
 ###Installing tools and dependencies
 	$ apt-get install python-setuptools 
 	$ easy_install pip 
-	$ pip install tornado 
 	$ apt-get install git 
 	$ apt-get install nginx 
 	$ pip install supervisor 
 
-###Make directories for your app:
+###Make directories for your app
 	$ mkdir /srv/www
 
-###Pull in source code:
+###Pull in source code
 	$ cd /srv/www/
 	$ git clone git@github.com:gaolinjie/3n1b.com.git
 
-###Create symbolic links to conf files:
+###Create symbolic links to conf files
 	$ cd /etc/nginx 
 	$ rm nginx.conf
 	$ ln -s /srv/www/3n1b.com/conf/nginx.conf nginx.conf 
 	$ cd
 	$ ln -s /srv/www/3n1b.com/conf/supervisord.conf supervisord.conf  
 
-###Create nginx user:
+###Create nginx user
 	$ adduser --system --no-create-home --disabled-login --disabled-password --group nginx 
 
 ###Create a logs directory:
 	$ mkdir ~/logs 
 
-###Start Supervisor and Nginx:
+###Start Supervisor and Nginx
 	$ supervisord
 	$ /etc/init.d/nginx start
 
 ###Visit your public IP address.
 
-###Update your web app:
+###Update your web app
 	$ cd /srv/www/3n1b.com
 	$ git pull
