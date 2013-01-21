@@ -28,6 +28,7 @@ from lib.utils import find_mentions
 
 class IndexHandler(BaseHandler):
     def get(self, template_variables = {}):
+        tab = self.get_argument('tab', "index")
         user_info = self.current_user
         page = int(self.get_argument("p", "1"))
         template_variables["user_info"] = user_info
@@ -38,18 +39,25 @@ class IndexHandler(BaseHandler):
                 "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
-
+            user_college = self.college_model.get_college_by_college_name(user_info["collegename"])
+            template_variables["college"] = user_college
+            if(tab=="index"):
+                template_variables["topics"] = self.topic_model.get_all_topics(current_page = page)           
+            else:
+                template_variables["topics"] = self.topic_model.get_all_topics_by_college_slug(current_page = page, college_slug = user_college.slug)
         template_variables["status_counter"] = {
             "users": self.user_model.get_all_users_count(),
             "nodes": self.node_model.get_all_nodes_count(),
             "topics": self.topic_model.get_all_topics_count(),
             "replies": self.reply_model.get_all_replies_count(),
         }
-        template_variables["topics"] = self.topic_model.get_all_topics(current_page = page)
+        if(tab=="index"):
+            template_variables["active_page"] = "topic"           
+        else:
+            template_variables["active_page"] = tab      
         template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
-        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
-        template_variables["active_page"] = "topic"
-        template_variables["gen_random"] = gen_random
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
+        template_variables["gen_random"] = gen_random       
         self.render("topic/topics.html", **template_variables)
 
 class NodeTopicsHandler(BaseHandler):

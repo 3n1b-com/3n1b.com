@@ -24,14 +24,22 @@
 </ul>
 #}
 <div class="subnav">
+    {% if user_info: %}
     {% set tab_bar = [
-                    ('/', 'topic', '所有大学'),
-                    ('/', '', '中国传媒大学'),                   
-                    ('/groups', '', '兴趣小组'),
-                    ('/follows', '', '关注的人'),                  
-                ] -%}
+        ('/', 'topic', '所有大学'),
+        ('/?tab=college', 'college', college.name),                   
+        ('/?tab=interest', 'interest', '兴趣小组'),
+        ('/?tab=follows', 'follows', '关注的人'),                  
+    ] -%}
+    {% else: %}
+    {% set tab_bar = [
+        ('/', 'topic', '所有大学'),               
+        ('/?tab=interest', 'interest', '兴趣小组'),
+        ('/?tab=follows', 'follows', '关注的人'),                  
+    ] -%}
+    {% endif %}
 
-                {% set active_page = active_page|default('index') -%}
+    {% set active_page = active_page|default('index') -%}
     <ul class="nav nav-pills">
         {% for href, id, caption in tab_bar %}
         <li{% if id == active_page %} class="active"{% endif %}>
