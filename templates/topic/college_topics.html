@@ -1,10 +1,10 @@
 {% extends 'snippet/layout.html' %}
 
 {% block main %}
-<div class="topics container-box node-topics">
+<div class="topics container-box college-topics">
     <div class="ui-header">
-        <a class="btn btn-small fr" type="button" href="/t/create/{{ node.slug }}">发起新话题</a>
-        <span class="bread-nav">叁年壹班 › {{ node.name }}</span>
+        <a class="btn btn-small fr" type="button" href="/t/create/{{ college.slug }}">发起新话题</a>
+        <span class="bread-nav">叁年壹班 › {{ college.name }}</span>
     </div>
 
     <div class="ui-content">
@@ -53,7 +53,7 @@
 
             {% if topics.page.total == 0 %}
         <div class="pl10 pr10">
-            <div class="alert mt20">该小组下暂时还没有话题，发出你的讨论吧。</div>
+            <div class="alert mt20">该学校下暂时还没有话题，发出你的讨论吧。</div>
         </div>
         {% endif %}
     </div>

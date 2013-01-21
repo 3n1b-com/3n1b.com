@@ -60,6 +60,7 @@ class Application(tornado.web.Application):
             (r"/t/edit/(.*)", handler.topic.EditHandler),
             (r"/reply/edit/(.*)", handler.topic.ReplyEditHandler),
             (r"/node/(.*)", handler.topic.NodeTopicsHandler),
+            (r"/college/(.*)", handler.topic.CollegeTopicsHandler),
             (r"/u/(.*)/topics", handler.topic.UserTopicsHandler),
             (r"/u/(.*)/replies", handler.topic.UserRepliesHandler),
             (r"/u/(.*)/favorites", handler.topic.UserFavoritesHandler),
@@ -100,6 +101,7 @@ class Application(tornado.web.Application):
         self.reply_model = self.loader.use("reply.model")
         self.plane_model = self.loader.use("plane.model")
         self.node_model = self.loader.use("node.model")
+        self.college_model = self.loader.use("college.model")
         self.notification_model = self.loader.use("notification.model")
         self.vote_model = self.loader.use("vote.model")
         self.favorite_model = self.loader.use("favorite.model")

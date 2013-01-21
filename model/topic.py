@@ -16,6 +16,7 @@ class TopicModel(Query):
 
     def get_all_topics(self, num = 16, current_page = 1):
         join = "LEFT JOIN user AS author_user ON topic.author_id = author_user.uid \
+                LEFT JOIN college ON topic.college_id = college.id \
                 LEFT JOIN node ON topic.node_id = node.id \
                 LEFT JOIN user AS last_replied_user ON topic.last_replied_by = last_replied_user.uid"
         order = "last_touched DESC, created DESC, last_replied_time DESC, id DESC"
@@ -27,6 +28,8 @@ class TopicModel(Query):
                 author_user.reputation as author_reputation, \
                 node.name as node_name, \
                 node.slug as node_slug, \
+                college.name as college_name, \
+                college.slug as college_slug, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.order(order).join(join).field(field).pages(current_page = current_page, list_rows = num)
@@ -34,6 +37,7 @@ class TopicModel(Query):
     def get_all_topics_by_node_slug(self, num = 16, current_page = 1, node_slug = None):
         where = "node.slug = '%s'" % node_slug
         join = "LEFT JOIN user AS author_user ON topic.author_id = author_user.uid \
+                LEFT JOIN college ON topic.college_id = college.id \
                 LEFT JOIN node ON topic.node_id = node.id \
                 LEFT JOIN user AS last_replied_user ON topic.last_replied_by = last_replied_user.uid"
         order = "last_touched DESC, created DESC, last_replied_time DESC, id DESC"
@@ -45,6 +49,29 @@ class TopicModel(Query):
                 author_user.reputation as author_reputation, \
                 node.name as node_name, \
                 node.slug as node_slug, \
+                college.name as college_name, \
+                college.slug as college_slug, \
+                last_replied_user.username as last_replied_username, \
+                last_replied_user.nickname as last_replied_nickname"
+        return self.where(where).order(order).join(join).field(field).pages(current_page = current_page, list_rows = num)
+
+    def get_all_topics_by_college_slug(self, num = 16, current_page = 1, college_slug = None):
+        where = "college.slug = '%s'" % college_slug
+        join = "LEFT JOIN user AS author_user ON topic.author_id = author_user.uid \
+                LEFT JOIN college ON topic.college_id = college.id \
+                LEFT JOIN node ON topic.node_id = node.id \
+                LEFT JOIN user AS last_replied_user ON topic.last_replied_by = last_replied_user.uid"
+        order = "last_touched DESC, created DESC, last_replied_time DESC, id DESC"
+        field = "topic.*, \
+                author_user.username as author_username, \
+                author_user.nickname as author_nickname, \
+                author_user.avatar as author_avatar, \
+                author_user.uid as author_uid, \
+                author_user.reputation as author_reputation, \
+                node.name as node_name, \
+                node.slug as node_slug, \
+                college.name as college_name, \
+                college.slug as college_slug, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.where(where).order(order).join(join).field(field).pages(current_page = current_page, list_rows = num)
@@ -55,6 +82,7 @@ class TopicModel(Query):
     def get_user_all_topics(self, uid, num = 16, current_page = 1):
         where = "topic.author_id = %s" % uid
         join = "LEFT JOIN user AS author_user ON topic.author_id = author_user.uid \
+                LEFT JOIN college ON topic.college_id = college.id \
                 LEFT JOIN node ON topic.node_id = node.id \
                 LEFT JOIN user AS last_replied_user ON topic.last_replied_by = last_replied_user.uid"
         order = "id DESC"
@@ -66,6 +94,8 @@ class TopicModel(Query):
                 author_user.reputation as author_reputation, \
                 node.name as node_name, \
                 node.slug as node_slug, \
+                college.name as college_name, \
+                college.slug as college_slug, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.where(where).order(order).join(join).field(field).pages(current_page = current_page, list_rows = num)
@@ -85,6 +115,7 @@ class TopicModel(Query):
     def get_topic_by_topic_id(self, topic_id):
         where = "topic.id = %s" % topic_id
         join = "LEFT JOIN user AS author_user ON topic.author_id = author_user.uid \
+                LEFT JOIN college ON topic.college_id = college.id \
                 LEFT JOIN node ON topic.node_id = node.id \
                 LEFT JOIN user AS last_replied_user ON topic.last_replied_by = last_replied_user.uid"
         field = "topic.*, \
@@ -95,6 +126,8 @@ class TopicModel(Query):
                 author_user.reputation as author_reputation, \
                 node.name as node_name, \
                 node.slug as node_slug, \
+                college.name as college_name, \
+                college.slug as college_slug, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.where(where).join(join).field(field).find()

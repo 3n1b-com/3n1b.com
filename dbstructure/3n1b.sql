@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50527
  Source Host           : localhost
- Source Database       : f2e
+ Source Database       : 3n1b
 
  Target Server Type    : MySQL
  Target Server Version : 50527
@@ -16,6 +16,25 @@
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+--  Table structure for `college`
+-- ----------------------------
+DROP TABLE IF EXISTS `college`;
+CREATE TABLE `college` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text,
+  `slug` text,
+  `thumb` text,
+  `introduction` text,
+  `created` text,
+  `updated` text,
+  `plane_id` int(11) DEFAULT NULL,
+  `topic_count` int(11) DEFAULT NULL,
+  `custom_style` text,
+  `limit_reputation` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `favorite`
@@ -108,6 +127,7 @@ CREATE TABLE `topic` (
   `hits` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
+  `college_id` int(11) DEFAULT NULL,
   `node_id` int(11) DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL,
   `reply_count` int(11) DEFAULT NULL,
@@ -153,6 +173,7 @@ CREATE TABLE `user` (
   `password` text,
   `username` text,
   `nickname` text,
+  `collegename` text,
   `avatar` text,
   `signature` text,
   `location` text,

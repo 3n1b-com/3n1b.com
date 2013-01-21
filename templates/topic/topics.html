@@ -52,6 +52,10 @@
                 <a href="/t/{{ topic.id }}#reply{{ topic.reply_count or 0 }}">{{ topic.title }}</a>
             </h3>
             <div class="meta">
+                <span class="collegename">
+                    <a href="/college/{{ topic.college_slug }}">{{ topic.college_name }}</a>
+                </span>
+                •
                 <span class="node">
                     <a href="/node/{{ topic.node_slug }}">{{ topic.node_name }}</a>
                 </span>

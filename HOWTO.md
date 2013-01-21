@@ -42,8 +42,13 @@ HOWTO deploy on Linode
 	$ apt-get install python-MySQLdb
 
 ###Install PIL
-	$ sudo apt-get build-dep python-imaging 
-	$ pip install http://effbot.org/downloads/Imaging-1.1.7.tar.gz
+	$ apt-get build-dep python-imaging 
+	$ apt-get install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
+	$ ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+	$ ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+	$ ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+	$ pip install -U PIL
+	# pip install http://effbot.org/downloads/Imaging-1.1.7.tar.gz
 
 ###Create database and then execute sql file in dbstructure/
 	$ mysql -u root -p

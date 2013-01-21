@@ -58,8 +58,8 @@
             </div>
             {% endif %}
             <div class="user-number">
-                <div class="number">F2E第{{ user_info.uid }}号成员</div>
-                <div class="since">入住于{{ user_info.created.date() }}</div>
+                <div class="number">叁年壹班 第{{ user_info.uid }}号成员</div>
+                <div class="since">入住于 {{ user_info.created.date() }}</div>
             </div>
         </div>
         <div class="ui-content">
@@ -148,7 +148,7 @@
         {% if not topics.page.total == 0 %}
     <div class="topic-lists container-box mt10">
         <div class="ui-header">
-            <span class="title">主题列表</span>
+            <span class="title">话题列表</span>
         </div>
         <div class="ui-content topics">
             {% for topic in topics.list %}
@@ -193,7 +193,7 @@
             #}
         </div>
         <div class="ui-footer">
-            <a href="/u/{{ user_info.username }}/topics">›› 查看更多主题</a>
+            <a href="/u/{{ user_info.username }}/topics">›› 查看更多话题</a>
         </div>
     </div>
     {% endif %}
@@ -208,7 +208,7 @@
             <div class="reply-item">
                 <div class="main">
                     <span class="title">
-                        回复了 {{ reply.topic_author_username }} 创建的主题
+                        回复了 {{ reply.topic_author_username }} 创建的话题
                         <a href="/t/{{ reply.topic_id }}">{{ reply.topic_title }}</a>
                     </span>
                     <div class="content">{{ reply.content|markdown|content_process }}</div>
@@ -229,7 +229,7 @@
     <div class="usercard container-box">
         <div class="ui-content">
             <div class="status status-topic"> <strong><a href="/u/{{ user_info.username }}/topics">{{ user_info.counter.topics }}</a></strong> 
-                主题
+                话题
             </div>
             <div class="status status-reply">
                 <strong><a href="/u/{{ user_info.username }}/replies">{{ user_info.counter.replies }}</a></strong> 

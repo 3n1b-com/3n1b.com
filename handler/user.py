@@ -296,6 +296,7 @@ class RegisterHandler(BaseHandler):
 
         duplicated_email = self.user_model.get_user_by_email(form.email.data)
         duplicated_username = self.user_model.get_user_by_username(form.username.data)
+        duplicated_collegename = self.college_model.get_college_by_college_name(form.collegename.data)
 
         if(duplicated_email or duplicated_username):
             template_variables["errors"] = {}
@@ -317,6 +318,13 @@ class RegisterHandler(BaseHandler):
             self.get(template_variables)
             return
 
+        # validate college name
+        if duplicated_collegename is None:
+            template_variables["errors"] = {}
+            template_variables["errors"]["duplicated_collegename"] = [u"学校名称不正确"]
+            self.get(template_variables)
+            return
+
         # continue while validate succeed
 
         secure_password = hashlib.sha1(form.password.data).hexdigest()
@@ -325,6 +333,7 @@ class RegisterHandler(BaseHandler):
             "email": form.email.data,
             "password": secure_password,
             "username": form.username.data,
+            "collegename": form.collegename.data,
             "created": time.strftime('%Y-%m-%d %H:%M:%S')
         }
 
@@ -338,7 +347,7 @@ class RegisterHandler(BaseHandler):
 
             # send register success mail to user
 
-            mail_title = u"前端社区（F2E.im）注册成功通知"
+            mail_title = u"叁年壹班 注册成功通知"
             mail_content = self.render_string("user/register_mail.html")
             send(mail_title, mail_content, form.email.data)
 

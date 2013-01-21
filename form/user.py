@@ -16,6 +16,10 @@ class RegisterForm(Form):
         validators.Regexp("^[a-zA-Z][a-zA-Z0-9_]*$", message = "用户名格式错误（英文字母开头，数字，下划线构成）"),
     ])
 
+    collegename = TextField('Collegename', [
+        validators.Required(message = "必须填写学校"),
+    ])
+
     email = TextField('Email', [
         validators.Required(message = "必须填写Email"),
         validators.Length(min = 4, message = "Email长度有误"),
@@ -26,7 +30,7 @@ class RegisterForm(Form):
         validators.Required(message = "必须填写密码"),
         validators.Length(min = 6, message = "密码长度过短（6-64个字符）"),
         validators.Length(max = 64, message = "密码长度过长（6-64个字符）"),
-        validators.EqualTo('password_confirm', message='两次输入密码不一致'),
+        #validators.EqualTo('password_confirm', message='两次输入密码不一致'),
     ])
 
     password_confirm = TextField('Password_confirm')

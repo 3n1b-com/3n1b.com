@@ -293,6 +293,8 @@ a.btn-small { font-size: 12px; }
     .topics .topic-item .title { font-size: 16px; font-weight: normal; line-height: 21px; color: #777; margin: 0 0 7px 0; letter-spacing: 0; }
       .topics .topic-item .title a { color: #777; }
     .topics .topic-item .meta { font-size: 12px; color: #a5a5a5; }
+      .topics .topic-item .meta .collegename { -webkit-border-radius: first-value-of(3px) first-value-of(3px); -moz-border-radius: 3px / 3px; border-radius: 3px / 3px; display: inline-block; padding: 3px 4px; background: #eee; }
+        .topics .topic-item .meta .collegename a { color: #a5a5a5; }
       .topics .topic-item .meta .node { -webkit-border-radius: first-value-of(3px) first-value-of(3px); -moz-border-radius: 3px / 3px; border-radius: 3px / 3px; display: inline-block; padding: 3px 4px; background: #eee; }
         .topics .topic-item .meta .node a { color: #a5a5a5; }
       .topics .topic-item .meta .username { font-weight: bold; color: #888; }

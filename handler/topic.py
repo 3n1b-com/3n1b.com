@@ -69,6 +69,23 @@ class NodeTopicsHandler(BaseHandler):
         template_variables["gen_random"] = gen_random
         self.render("topic/node_topics.html", **template_variables)
 
+class CollegeTopicsHandler(BaseHandler):
+    def get(self, college_slug, template_variables = {}):
+        user_info = self.current_user
+        page = int(self.get_argument("p", "1"))
+        template_variables["user_info"] = user_info
+        if(user_info):
+            template_variables["user_info"]["counter"] = {
+                "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
+                "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
+                "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+            }
+        template_variables["topics"] = self.topic_model.get_all_topics_by_college_slug(current_page = page, college_slug = college_slug)
+        template_variables["college"] = self.college_model.get_college_by_college_slug(college_slug)
+        template_variables["active_page"] = "topic"
+        template_variables["gen_random"] = gen_random
+        self.render("topic/college_topics.html", **template_variables)
+
 class ViewHandler(BaseHandler):
     def get(self, topic_id, template_variables = {}):
         user_info = self.current_user
@@ -222,6 +239,7 @@ class CreateHandler(BaseHandler):
         # continue while validate succeed
 
         node = self.node_model.get_node_by_node_slug(node_slug)
+        college = self.college_model.get_college_by_college_name(self.current_user["collegename"])
         
         topic_info = {
             "author_id": self.current_user["uid"],
@@ -232,6 +250,7 @@ class CreateHandler(BaseHandler):
             "created": time.strftime('%Y-%m-%d %H:%M:%S'),
             "reply_count": 0,
             "last_touched": time.strftime('%Y-%m-%d %H:%M:%S'),
+            "college_id": college["id"],
         }
 
         reply_id = self.topic_model.add_new_topic(topic_info)
