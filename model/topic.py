@@ -29,7 +29,7 @@ class TopicModel(Query):
                 node.name as node_name, \
                 node.slug as node_slug, \
                 college.name as college_name, \
-                college.slug as college_slug, \
+                college.id as college_id, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.order(order).join(join).field(field).pages(current_page = current_page, list_rows = num)
@@ -50,13 +50,13 @@ class TopicModel(Query):
                 node.name as node_name, \
                 node.slug as node_slug, \
                 college.name as college_name, \
-                college.slug as college_slug, \
+                college.id as college_id, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.where(where).order(order).join(join).field(field).pages(current_page = current_page, list_rows = num)
 
-    def get_all_topics_by_college_slug(self, num = 16, current_page = 1, college_slug = None):
-        where = "college.slug = '%s'" % college_slug
+    def get_all_topics_by_college_id(self, num = 16, current_page = 1, college_id = None):
+        where = "college.id = '%s'" % college_id
         join = "LEFT JOIN user AS author_user ON topic.author_id = author_user.uid \
                 LEFT JOIN college ON topic.college_id = college.id \
                 LEFT JOIN node ON topic.node_id = node.id \
@@ -71,7 +71,7 @@ class TopicModel(Query):
                 node.name as node_name, \
                 node.slug as node_slug, \
                 college.name as college_name, \
-                college.slug as college_slug, \
+                college.id as college_id, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.where(where).order(order).join(join).field(field).pages(current_page = current_page, list_rows = num)
@@ -95,7 +95,7 @@ class TopicModel(Query):
                 node.name as node_name, \
                 node.slug as node_slug, \
                 college.name as college_name, \
-                college.slug as college_slug, \
+                college.id as college_id, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.where(where).order(order).join(join).field(field).pages(current_page = current_page, list_rows = num)
@@ -127,7 +127,7 @@ class TopicModel(Query):
                 node.name as node_name, \
                 node.slug as node_slug, \
                 college.name as college_name, \
-                college.slug as college_slug, \
+                college.id as college_id, \
                 last_replied_user.username as last_replied_username, \
                 last_replied_user.nickname as last_replied_nickname"
         return self.where(where).join(join).field(field).find()

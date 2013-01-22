@@ -20,12 +20,8 @@ class CollegeModel(Query):
     def get_all_colleges_count(self):
         return self.count()
 
-    def get_colleges_by_plane_id(self, plane_id):
-        where = "plane_id = %s" % plane_id
-        return self.where(where).select()
-
-    def get_college_by_college_slug(self, college_slug):
-        where = "slug = '%s'" % college_slug
+    def get_college_by_college_id(self, college_id):
+        where = "id = '%s'" % college_id
         return self.where(where).find()
 
     def get_college_by_college_name(self, college_name):

@@ -18,25 +18,6 @@ SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
---  Table structure for `college`
--- ----------------------------
-DROP TABLE IF EXISTS `college`;
-CREATE TABLE `college` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text,
-  `slug` text,
-  `thumb` text,
-  `introduction` text,
-  `created` text,
-  `updated` text,
-  `plane_id` int(11) DEFAULT NULL,
-  `topic_count` int(11) DEFAULT NULL,
-  `custom_style` text,
-  `limit_reputation` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
-
--- ----------------------------
 --  Table structure for `favorite`
 -- ----------------------------
 DROP TABLE IF EXISTS `favorite`;
@@ -49,25 +30,6 @@ CREATE TABLE `favorite` (
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Table structure for `node`
--- ----------------------------
-DROP TABLE IF EXISTS `node`;
-CREATE TABLE `node` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text,
-  `slug` text,
-  `thumb` text,
-  `introduction` text,
-  `created` text,
-  `updated` text,
-  `plane_id` int(11) DEFAULT NULL,
-  `topic_count` int(11) DEFAULT NULL,
-  `custom_style` text,
-  `limit_reputation` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `notification`

@@ -44,7 +44,9 @@ class IndexHandler(BaseHandler):
             if(tab=="index"):
                 template_variables["topics"] = self.topic_model.get_all_topics(current_page = page)           
             else:
-                template_variables["topics"] = self.topic_model.get_all_topics_by_college_slug(current_page = page, college_slug = user_college.slug)
+                template_variables["topics"] = self.topic_model.get_all_topics_by_college_id(current_page = page, college_id = user_college.id)
+        else:
+            template_variables["topics"] = self.topic_model.get_all_topics(current_page = page);
         template_variables["status_counter"] = {
             "users": self.user_model.get_all_users_count(),
             "nodes": self.node_model.get_all_nodes_count(),
@@ -78,7 +80,7 @@ class NodeTopicsHandler(BaseHandler):
         self.render("topic/node_topics.html", **template_variables)
 
 class CollegeTopicsHandler(BaseHandler):
-    def get(self, college_slug, template_variables = {}):
+    def get(self, college_id, template_variables = {}):
         user_info = self.current_user
         page = int(self.get_argument("p", "1"))
         template_variables["user_info"] = user_info
@@ -88,8 +90,8 @@ class CollegeTopicsHandler(BaseHandler):
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
-        template_variables["topics"] = self.topic_model.get_all_topics_by_college_slug(current_page = page, college_slug = college_slug)
-        template_variables["college"] = self.college_model.get_college_by_college_slug(college_slug)
+        template_variables["topics"] = self.topic_model.get_all_topics_by_college_id(current_page = page, college_id = college_id)
+        template_variables["college"] = self.college_model.get_college_by_college_id(college_id)
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
         self.render("topic/college_topics.html", **template_variables)

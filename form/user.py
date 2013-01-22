@@ -13,7 +13,7 @@ class RegisterForm(Form):
         validators.Required(message = "必须填写用户名"),
         validators.Length(min = 3, message = "用户名长度过短（3-12个字符）"),
         validators.Length(max = 12, message = "用户名长度过长（3-12个字符）"),
-        validators.Regexp("^[a-zA-Z][a-zA-Z0-9_]*$", message = "用户名格式错误（英文字母开头，数字，下划线构成）"),
+        #validators.Regexp("^[a-zA-Z][a-zA-Z0-9_]*$", message = "用户名格式错误（英文字母开头，数字，下划线构成）"),
     ])
 
     collegename = TextField('Collegename', [
