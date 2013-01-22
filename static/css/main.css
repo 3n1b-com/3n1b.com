@@ -649,6 +649,7 @@ a.btn-small {
   background-image: -moz-linear-gradient(top, white, whitesmoke);
   background-image: -o-linear-gradient(top, white, whitesmoke);
   background-image: linear-gradient(to bottom, white, whitesmoke);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f5f5f5', GradientType=0);
 }
     .topics .topic-item:first-child {
   -webkit-border-radius: first-value-of(5px) first-value-of(5px 5px 0 0);
