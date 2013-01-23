@@ -1,5 +1,10 @@
 {% extends 'snippet/layout.html' %}
 
+{% block javascript %}
+<script type="text/javascript" src="/static/js/base/jquery.js"></script>
+<script type="text/javascript" src="/static/js/widget/bootstrap-typeahead.js"></script>
+{% endblock %}
+
 {% block main %}
 <div class="container-box">
     <form class="form-horizontal" action='' method="POST">
@@ -21,7 +26,8 @@
                 <!-- Collegename -->
                 <label class="control-label" for="collegename">学校</label>
                 <div class="controls">
-                    <input type="text" id="collegename" name="collegename" placeholder="" class="input-xlarge">
+                    {#<input type="text" id="collegename" name="collegename" placeholder="" class="input-xlarge">#}
+                    <input type="text" id="collegename" name="collegename" placeholder="" class="input-xlarge" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source="[&quot;北京航空航天大学&quot;,&quot;北京邮电大学&quot;,&quot;北京师范大学&quot;,&quot;南京大学&quot;,&quot;南京师大&quot;,&quot;南京理工&quot;,&quot;南京财经&quot;,&quot;南京医科大&quot;,&quot;南京工大&quot;,&quot;南京农大&quot;,&quot;南京林大&quot;,&quot;南京信息工程大学&quot;]">
                     <p class="help-block">输入你的学校名，快速加入我们的校园社区</p>
                 </div>
             </div>

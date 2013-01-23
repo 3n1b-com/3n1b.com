@@ -1,7 +1,7 @@
 {% extends 'snippet/layout.html' %}
 
 {% block title %}
-    {{ topic.title }} - F2E
+    {{ topic.title }} - 叁年壹班
 {% endblock %}
 
 {% block stylesheet %}
@@ -118,7 +118,9 @@
     <div class="ui-content">{{ topic.content|markdown|content_process }}</div>
     <div class="ui-footer">
         <a href="/favorite?topic_id={{ topic.id }}" class="J_topicFavorite">加入收藏</a>
+        {#
         <a href="#" onclick="window.open('https://twitter.com/intent/tweet?hashtags={{ topic.node_slug }}&text={{ topic.title }}&url=http://{{ request.host }}{{ request.uri }}');">Tweet</a>
+        #}
         <a href="#" onclick="window.open('http://service.weibo.com/share/share.php?url=http://{{ request.host }}{{ request.uri }}&title=F2E%20-%20{{ topic.title }}', '_blank', 'width=550, height=370');">新浪微博</a>
         <a href="/vote?topic_id={{ topic.id }}" class="J_topicVote">喜欢</a>
         {% if current_user and current_user.uid == topic.author_id %}
