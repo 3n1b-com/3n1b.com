@@ -49,18 +49,6 @@ CREATE TABLE `notification` (
 ) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `plane`
--- ----------------------------
-DROP TABLE IF EXISTS `plane`;
-CREATE TABLE `plane` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text,
-  `created` text,
-  `updated` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-
--- ----------------------------
 --  Table structure for `reply`
 -- ----------------------------
 DROP TABLE IF EXISTS `reply`;
