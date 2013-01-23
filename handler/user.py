@@ -229,7 +229,7 @@ class ForgotPasswordHandler(BaseHandler):
 
         # send password reset link to user
 
-        mail_title = u"前端社区（F2E.im）找回密码"
+        mail_title = u"叁年壹班（3n1b.com）找回密码"
         template_variables = {"email": form.email.data, "new_password": new_password};
         template_variables["success_message"] = [u"新密码已发送至您的注册邮箱"]
         mail_content = self.render_string("user/forgot_password_mail.html", **template_variables)
