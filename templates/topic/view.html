@@ -121,7 +121,7 @@
         {#
         <a href="#" onclick="window.open('https://twitter.com/intent/tweet?hashtags={{ topic.node_slug }}&text={{ topic.title }}&url=http://{{ request.host }}{{ request.uri }}');">Tweet</a>
         #}
-        <a href="#" onclick="window.open('http://service.weibo.com/share/share.php?url=http://{{ request.host }}{{ request.uri }}&title=F2E%20-%20{{ topic.title }}', '_blank', 'width=550, height=370');">新浪微博</a>
+        <a href="#" onclick="window.open('http://service.weibo.com/share/share.php?url=http://{{ request.host }}{{ request.uri }}&title={叁年壹班}%20-%20{{ topic.title }}', '_blank', 'width=550, height=370');">新浪微博</a>
         <a href="/vote?topic_id={{ topic.id }}" class="J_topicVote">喜欢</a>
         {% if current_user and current_user.uid == topic.author_id %}
         <a href="/t/edit/{{ topic.id }}" class="fr">编辑主题</a>
@@ -220,7 +220,7 @@
         </div>
         <div class="status status-reputation">
             <strong>{{ user_info.reputation or 0 }}</strong>
-            威望
+            声望
         </div>
     </div>
 </div>
