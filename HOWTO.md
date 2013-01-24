@@ -56,6 +56,10 @@ HOWTO deploy on Linode
 	mysql> GRANT ALL PRIVILEGES ON 3n1b.* TO '3n1b'@'localhost' IDENTIFIED BY '3n1b';
 	mysql> exit
 	$ mysql -u 3n1b -p --database=3n1b < dbstructure/3n1b.sql
+	$ mysql -u 3n1b -p --database=3n1b < dbstructure/node.sql
+	$ mysql -u 3n1b -p --database=3n1b < dbstructure/college.sql
+	$ mysql -u 3n1b -p --database=3n1b < dbstructure/plane.sql
+	$ mysql -u 3n1b -p --database=3n1b < dbstructure/province.sql
 
 ###Create symbolic links to conf files
 	$ cd /etc/nginx 
