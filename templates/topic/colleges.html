@@ -1,110 +1,16 @@
 {% extends 'snippet/layout.html' %}
 
 {% block main %}
-    {#
-<ul class="news container-box">
-    <li>
-        <a href="#">HTML5(目前)无法帮你实现的五件事</a>
-    </li>
-    <li>
-        <a href="#">DNS优化的原理和方法</a>
-    </li>
-    <li>
-        <a href="#">浅谈互联网产品前期设计方法</a>
-    </li>
-    <li>
-        <a href="#">如何在Google成为优秀的产品经理?</a>
-    </li>
-    <li>
-        <a href="#">页面前端的水有多深？</a>
-    </li>
-    <li>
-        <a href="#">如何利用互联网工具调研网站</a>
-    </li>
-</ul>
-#}
-<div class="subnav">
-    {% if user_info: %}
-    {% set tab_bar = [
-        ('/', 'topic', '所有大学'),
-        ('/?tab=college', 'college', college.name),                   
-        ('/?tab=interest', 'interest', '兴趣小组'),
-        ('/?tab=follows', 'follows', '关注的人'),                  
-    ] -%}
-    {% else: %}
-    {% set tab_bar = [
-        ('/', 'topic', '所有大学'),               
-        ('/?tab=interest', 'interest', '兴趣小组'),
-        ('/?tab=follows', 'follows', '关注的人'),                  
-    ] -%}
-    {% endif %}
-
-    {% set active_page = active_page|default('index') -%}
-    <ul class="nav nav-pills">
-        {% for href, id, caption in tab_bar %}
-        <li{% if id == active_page %} class="active"{% endif %}>
-            <a href="{{ href|e }}">{{ caption|e }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-
-<div class="topics container-box deprecated-mt10">
-    {% for topic in topics.list %}
-    <div class="topic-item">
-        <a href="/u/{{ topic.author_username }}">
-            <img src="/static/avatar/m_{{ topic.author_avatar or 'default.png' }}" alt="" class="avatar" />
-        </a>
-        <div class="main">
-            <h3 class="title">
-                <a href="/t/{{ topic.id }}#reply{{ topic.reply_count or 0 }}">{{ topic.title }}</a>
-            </h3>
-            <div class="meta">
-                <span class="collegename">
-                    <a href="/college/{{ topic.college_id }}">{{ topic.college_name }}</a>
-                </span>
-                •
-                <span class="node">
-                    <a href="/node/{{ topic.node_slug }}">{{ topic.node_name }}</a>
-                </span>
-                •
-                <span class="username">
-                    <a href="/u/{{ topic.author_username or topic.author_uid }}">{{ topic.author_username }}</a>
-                </span>
-                • 
-                        {% if topic.last_replied_time %}
-                <span class="last-touched">{{ topic.last_touched|pretty_date }}</span>
-                •
-                <span class="last-reply-username">
-                    最后回复来自
-                    <a href="/u/{{ topic.last_replied_username or topic.last_replied_uid }}"> <strong>{{ topic.last_replied_username }}</strong>
-                    </a>
-                </span>
-                {% else %}
-                <span class="last-touched">{{ topic.last_touched|pretty_date }}</span>
-                {% endif %}
-            </div>
-        </div>
-        {% if topic.reply_count %}
-        <div class="count">
-            <a href="/t/{{ topic.id }}#reply{{ topic.reply_count or 0 }}">{{ topic.reply_count or 0 }}</a>
-        </div>
-        {% endif %}
-    </div>
-    {% endfor %}
-    <div class="pagination">{{ topics.page|pagination(request.uri) }}</div>
-</div>
 
 <div class="nodes-cloud container-box mt10">
-    <div class="fr"><a href="/nodes">浏览全部小组</a></div>
-    <h4 class="title">热门导航</h4>
+    <h4 class="title">所有大学</h4>
     <ul>
-        {% for plane in planes %}
+        {% for province in provinces %}
         <li>
-            <label for="">{{ plane.name }}</label>
+            <label for="">{{ province.name }}</label>
             <span class="nodes">
-                {% for node in plane.nodes %}
-                <a href="/node/{{ node.slug }}">{{ node.name }}</a>
+                {% for college in province.colleges %}
+                <span class="label label-info"><a href="/college/{{ college.id }}" style="color:#80BFFF">{{ college.name }}</a></span>
                 {% endfor %}
             </span>
         </li>

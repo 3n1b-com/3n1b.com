@@ -46,6 +46,10 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.application.college_model
 
     @property
+    def province_model(self):
+        return self.application.province_model
+        
+    @property
     def notification_model(self):
         return self.application.notification_model
 

@@ -561,14 +561,58 @@ class MembersHandler(BaseHandler):
     def get(self, template_variables = {}):
         user_info = self.current_user
         template_variables["user_info"] = user_info
-        template_variables["user_info"]["counter"] = {
+        if(user_info):
+            template_variables["user_info"]["counter"] = {
             "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
             "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
             "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
-        }
+        }        
         template_variables["members"] = self.user_model.get_users_by_latest(num = 49)
         template_variables["active_members"] = self.user_model.get_users_by_last_login(num = 49)
         template_variables["gen_random"] = gen_random
         template_variables["active_page"] = "members"
         self.render("topic/members.html", **template_variables)
 
+class NodesHandler(BaseHandler):
+    def get(self, template_variables = {}):
+        user_info = self.current_user
+        template_variables["user_info"] = user_info
+        if(user_info):
+            template_variables["user_info"]["counter"] = {
+                "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
+                "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+            }
+        template_variables["status_counter"] = {
+            "users": self.user_model.get_all_users_count(),
+            "nodes": self.node_model.get_all_nodes_count(),
+            "topics": self.topic_model.get_all_topics_count(),
+            "replies": self.reply_model.get_all_replies_count(),
+        }
+        template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
+        template_variables["gen_random"] = gen_random       
+        self.render("topic/nodes.html", **template_variables)
+
+class CollegesHandler(BaseHandler):
+    def get(self, template_variables = {}):
+        user_info = self.current_user
+        template_variables["user_info"] = user_info
+        if(user_info):
+            template_variables["user_info"]["counter"] = {
+                "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
+                "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+            }
+        template_variables["status_counter"] = {
+            "users": self.user_model.get_all_users_count(),
+            "nodes": self.node_model.get_all_nodes_count(),
+            "topics": self.topic_model.get_all_topics_count(),
+            "replies": self.reply_model.get_all_replies_count(),
+        }
+        template_variables["provinces"] = self.province_model.get_all_provinces_with_colleges()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
+        template_variables["gen_random"] = gen_random       
+        self.render("topic/colleges.html", **template_variables)

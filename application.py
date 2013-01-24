@@ -69,6 +69,8 @@ class Application(tornado.web.Application):
             (r"/favorite", handler.topic.FavoriteHandler),
             (r"/notifications", handler.notification.ListHandler),
             (r"/members", handler.topic.MembersHandler),
+            (r"/nodes", handler.topic.NodesHandler),
+            (r"/colleges", handler.topic.CollegesHandler),
             (r"/setting", handler.user.SettingHandler),
             (r"/setting/avatar", handler.user.SettingAvatarHandler),
             (r"/setting/avatar/gravatar", handler.user.SettingAvatarFromGravatarHandler),
@@ -102,6 +104,7 @@ class Application(tornado.web.Application):
         self.plane_model = self.loader.use("plane.model")
         self.node_model = self.loader.use("node.model")
         self.college_model = self.loader.use("college.model")
+        self.province_model = self.loader.use("province.model")
         self.notification_model = self.loader.use("notification.model")
         self.vote_model = self.loader.use("vote.model")
         self.favorite_model = self.loader.use("favorite.model")
