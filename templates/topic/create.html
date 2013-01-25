@@ -23,18 +23,35 @@
 {% block main %}
 <div class="topic-create container-box">
     <div class="ui-header">
-        <span class="title">创建新主题</span>
+        <span class="title">创建新话题</span>
     </div>
 
     <div class="ui-content">
-        <form class="mt10" action="/t/create/{{ node_slug }}" method="post">
+        <form class="mt10" action="/t/create/?c={{college.id}}&n={{ node.slug }}" method="post">
             {{ errors|dump_errors }}
             <div class="input-prepend mt10">
                 <span class="add-on">#</span>
-                <input class="span11" id="prependedInput" type="text" placeholder="主题" name="title"></div>
-            <textarea rows="3" class="content mt5 smart-code-support" placeholder="正文" name="content"></textarea>
-            <input type="submit" id="checkall" class="btn btn-small" value="立即创建">{{ xsrf_form_html() }}</form>
+                <input class="span11" id="prependedInput" type="text" placeholder="话题" name="title"></div>
+            <textarea rows="3" class="content mt5 smart-code-support" placeholder="请先在下方选择学校和小组，再编辑内容。" name="content"></textarea>
+            <div class="btn-group">
+                <button class="btn dropdown-toggle btn-small" data-toggle="dropdown">{{ college.name }}<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">{{ college.name }}</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/s/college/?c={{college.id}}&n={{ node.slug }}">修改学校...</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button class="btn dropdown-toggle btn-small" data-toggle="dropdown">{{ node.name }}<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">{{ node.name }}</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/s/node/?c={{college.id}}&n={{ node.slug }}">修改小组...</a></li>
+                </ul>
+            </div>
+            <input type="submit" id="checkall" class="btn btn-small" value="立即创建">{{ xsrf_form_html() }}</form>          
     </div>
+
 </div>
 {% endblock %}
 
@@ -51,7 +68,7 @@
     </div>
     <div class="ui-content">
         <div class="status status-topic"> <strong><a href="/u/{{ user_info.username }}/topics">{{ user_info.counter.topics }}</a></strong> 
-            主题
+            话题
         </div>
         <div class="status status-reply"> <strong><a href="/u/{{ user_info.username }}/replies">{{ user_info.counter.replies }}</a></strong> 
             回复

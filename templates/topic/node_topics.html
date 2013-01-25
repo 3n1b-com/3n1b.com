@@ -3,7 +3,7 @@
 {% block main %}
 <div class="topics container-box node-topics">
     <div class="ui-header">
-        <a class="btn btn-small fr" type="button" href="/t/create/{{ node.slug }}">发起新话题</a>
+        <a class="btn btn-small fr" type="button" href="/t/create/?c={{college.id}}&n={{ node.slug }}">发起新话题</a>
         <span class="bread-nav">首页 › {{ node.name }}</span>
     </div>
 

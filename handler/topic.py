@@ -73,6 +73,8 @@ class NodeTopicsHandler(BaseHandler):
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
+            user_college = self.college_model.get_college_by_college_name(user_info["collegename"])
+            template_variables["college"] = user_college
         template_variables["topics"] = self.topic_model.get_all_topics_by_node_slug(current_page = page, node_slug = node_slug)
         template_variables["node"] = self.node_model.get_node_by_node_slug(node_slug)
         template_variables["active_page"] = "topic"
@@ -92,6 +94,7 @@ class CollegeTopicsHandler(BaseHandler):
             }
         template_variables["topics"] = self.topic_model.get_all_topics_by_college_id(current_page = page, college_id = college_id)
         template_variables["college"] = self.college_model.get_college_by_college_id(college_id)
+        template_variables["node"] = self.node_model.get_node_by_node_slug("qna")
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
         self.render("topic/college_topics.html", **template_variables)
@@ -221,7 +224,7 @@ class ViewHandler(BaseHandler):
 
 class CreateHandler(BaseHandler):
     @tornado.web.authenticated
-    def get(self, node_slug = None, template_variables = {}):
+    def get(self, college_node = None, template_variables = {}):
         user_info = self.current_user
         template_variables["user_info"] = user_info
         template_variables["user_info"]["counter"] = {
@@ -230,12 +233,18 @@ class CreateHandler(BaseHandler):
             "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
         }
         template_variables["gen_random"] = gen_random
-        template_variables["node_slug"] = node_slug
+        college_id = self.get_argument('c', "0")
+        node_slug = self.get_argument('n', "qna")
+        node = self.node_model.get_node_by_node_slug(node_slug)
+        college = self.college_model.get_college_by_college_id(college_id)
+        template_variables["node"] = node
+        template_variables["college"] = college
         template_variables["active_page"] = "topic"
         self.render("topic/create.html", **template_variables)
 
     @tornado.web.authenticated
-    def post(self, node_slug = None, template_variables = {}):
+    def post(self, college_node = None, template_variables = {}):
+        print "CreateHandler:post"
         template_variables = {}
 
         # validate the fields
@@ -248,8 +257,10 @@ class CreateHandler(BaseHandler):
 
         # continue while validate succeed
 
+        college_id = self.get_argument('c', "0")
+        node_slug = self.get_argument('n', "qna")
         node = self.node_model.get_node_by_node_slug(node_slug)
-        college = self.college_model.get_college_by_college_name(self.current_user["collegename"])
+        college = self.college_model.get_college_by_college_id(college_id)
         
         topic_info = {
             "author_id": self.current_user["uid"],
@@ -574,7 +585,8 @@ class MembersHandler(BaseHandler):
         self.render("topic/members.html", **template_variables)
 
 class NodesHandler(BaseHandler):
-    def get(self, template_variables = {}):
+    def get(self, college_node = None, template_variables = {}):
+        print "NodesHandler:get"
         user_info = self.current_user
         template_variables["user_info"] = user_info
         if(user_info):
@@ -590,13 +602,21 @@ class NodesHandler(BaseHandler):
             "topics": self.topic_model.get_all_topics_count(),
             "replies": self.reply_model.get_all_replies_count(),
         }
+        college_id = self.get_argument('c', "0")
+        college = self.college_model.get_college_by_college_id(college_id)
+        if (self.request.path == "/nodes"):
+            node_prefix = "/node/"
+        else:
+            node_prefix = "/t/create/?c="+ str(college.id) +"&n="              
+        template_variables["college"] = college
+        template_variables["node_prefix"] = node_prefix
         template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
         template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
         template_variables["gen_random"] = gen_random       
         self.render("topic/nodes.html", **template_variables)
 
 class CollegesHandler(BaseHandler):
-    def get(self, template_variables = {}):
+    def get(self, college_node = None, template_variables = {}):
         user_info = self.current_user
         template_variables["user_info"] = user_info
         if(user_info):
@@ -612,6 +632,17 @@ class CollegesHandler(BaseHandler):
             "topics": self.topic_model.get_all_topics_count(),
             "replies": self.reply_model.get_all_replies_count(),
         }
+        node_slug = self.get_argument('n', "qna")
+        node = self.node_model.get_node_by_node_slug(node_slug)
+        template_variables["node"] = node
+        if (self.request.path == "/colleges"):
+            college_prefix = "/college/"
+            college_postfix = ""
+        else:
+            college_prefix = "/t/create/?c="
+            college_postfix = "&n=" + node.slug    
+        template_variables["college_prefix"] = college_prefix
+        template_variables["college_postfix"] = college_postfix   
         template_variables["provinces"] = self.province_model.get_all_provinces_with_colleges()
         template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
         template_variables["gen_random"] = gen_random       

@@ -10,7 +10,7 @@
             <label for="">{{ plane.name }}</label>
             <span class="nodes">
                 {% for node in plane.nodes %}
-                <span class="label label-success"><a href="/node/{{ node.slug }}" style="color:#FFFFFF">{{ node.name }}</a></span>
+                <span class="label label-success"><a href="{{ node_prefix }}{{ node.slug }}" style="color:#FFFFFF">{{ node.name }}</a></span>
                 {% endfor %}
             </span>
         </li>
