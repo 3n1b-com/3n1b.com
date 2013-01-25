@@ -615,7 +615,8 @@ class NodesHandler(BaseHandler):
         template_variables["node_prefix"] = node_prefix
         template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
         template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
-        template_variables["gen_random"] = gen_random       
+        template_variables["gen_random"] = gen_random 
+        template_variables["active_page"] = "nodes"      
         self.render("topic/nodes.html", **template_variables)
 
 class CollegesHandler(BaseHandler):
@@ -649,4 +650,5 @@ class CollegesHandler(BaseHandler):
         template_variables["provinces"] = self.province_model.get_all_provinces_with_colleges()
         template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
         template_variables["gen_random"] = gen_random       
+        template_variables["active_page"] = "colleges"  
         self.render("topic/colleges.html", **template_variables)
