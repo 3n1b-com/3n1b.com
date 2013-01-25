@@ -177,7 +177,7 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .label-important[href],.badge-important[href]{background-color:#953b39;}
 .label-warning,.badge-warning{background-color:#f89406;}
 .label-warning[href],.badge-warning[href]{background-color:#c67605;}
-.label-success,.badge-success{background-color:#468847;}
+.label-success,.badge-success{background-color:#009a61;}
 .label-success[href],.badge-success[href]{background-color:#356635;}
 .label-info,.badge-info{background-color:#3a87ad;}
 .label-info[href],.badge-info[href]{background-color:#2d6987;}
