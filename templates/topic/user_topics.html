@@ -70,6 +70,7 @@
             <img src="/static/avatar/m_{{ user_info.avatar or 'default.png' }}?t={{ gen_random() }}" alt="" class="avatar" />
         </a>
         <div class="username">{{ user_info.username }}</div>
+        <div class="collegename">{{ user_info.collegename }}</div>
         <div class="website">
             <a href="{{ user_info.website or '' }}">{{ user_info.website or '' }}</a>
         </div>

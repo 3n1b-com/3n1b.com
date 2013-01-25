@@ -781,6 +781,10 @@ a.btn-small {
   font-weight: bold;
   color: #a5a5a5;
 }
+    .usercard .ui-header .collegename, .user-page .profile .ui-header .collegename {
+  font-size: 12px;
+  color: #a5a5a5;
+}
     .usercard .ui-header .website a, .user-page .profile .ui-header .website a {
   color: #fff;
 }
