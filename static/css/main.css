@@ -585,7 +585,7 @@ a.btn-small {
   background-color: #eeeeee;
   background-repeat: repeat-x;
   background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#eeeeee));
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f53333), color-stop(100%,#eeeeee));
   background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
   background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
   background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%);
@@ -634,7 +634,7 @@ a.btn-small {
   border-top-right-radius: 5px;
 }
 .subnav_btn{
-    padding: 6px;
+    padding: 5px;
 }
   .topics .topic-item {
   padding: 10px 40px 10px 10px;

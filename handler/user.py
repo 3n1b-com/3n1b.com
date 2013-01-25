@@ -264,7 +264,12 @@ class LoginHandler(BaseHandler):
             do_login(self, user_info["uid"])
             # update `last_login`
             updated = self.user_model.set_user_base_info_by_uid(user_info["uid"], {"last_login": time.strftime('%Y-%m-%d %H:%M:%S')})
-            self.redirect(self.get_argument("next", "/"))
+            user_college = self.college_model.get_college_by_college_name(user_info["collegename"])
+            redirect_path = self.get_argument("next", "/")
+            print redirect_path
+            redirect_path = redirect_path.replace('1001', str(user_college.id))
+            print redirect_path
+            self.redirect(redirect_path)
             return
 
         template_variables["errors"] = {"invalid_email_or_password": [u"邮箱或者密码不正确"]}

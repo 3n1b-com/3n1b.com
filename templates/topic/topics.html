@@ -50,13 +50,11 @@
         </li>
         {% endfor %}
         <div class="subnav_btn">
-            <a class="btn btn-mini fr" type="button" href="/t/create/?c={{college.id}}&n={{ node.slug }}">发起新话题</a>
+            <a class="btn btn-small fr" type="button" href="/t/create/?c={{college.id}}&n={{ node.slug }}">发起新话题</a>
         </div>
     </ul>
 
 </div>
-
-
 
 <div class="topics container-box deprecated-mt10">
     {% for topic in topics.list %}

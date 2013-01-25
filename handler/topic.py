@@ -32,6 +32,7 @@ class IndexHandler(BaseHandler):
         user_info = self.current_user
         page = int(self.get_argument("p", "1"))
         template_variables["user_info"] = user_info
+        user_college = self.college_model.get_college_by_college_id(1001)
         if(user_info):
             template_variables["user_info"]["counter"] = {
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
@@ -40,13 +41,13 @@ class IndexHandler(BaseHandler):
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
             user_college = self.college_model.get_college_by_college_name(user_info["collegename"])
-            template_variables["college"] = user_college
             if(tab=="index"):
                 template_variables["topics"] = self.topic_model.get_all_topics(current_page = page)           
             else:
                 template_variables["topics"] = self.topic_model.get_all_topics_by_college_id(current_page = page, college_id = user_college.id)
         else:
             template_variables["topics"] = self.topic_model.get_all_topics(current_page = page);
+        template_variables["college"] = user_college
         template_variables["status_counter"] = {
             "users": self.user_model.get_all_users_count(),
             "nodes": self.node_model.get_all_nodes_count(),
@@ -68,6 +69,7 @@ class NodeTopicsHandler(BaseHandler):
         user_info = self.current_user
         page = int(self.get_argument("p", "1"))
         template_variables["user_info"] = user_info
+        user_college = self.college_model.get_college_by_college_id(1001)
         if(user_info):
             template_variables["user_info"]["counter"] = {
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
@@ -75,7 +77,7 @@ class NodeTopicsHandler(BaseHandler):
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
             user_college = self.college_model.get_college_by_college_name(user_info["collegename"])
-            template_variables["college"] = user_college
+        template_variables["college"] = user_college
         template_variables["topics"] = self.topic_model.get_all_topics_by_node_slug(current_page = page, node_slug = node_slug)
         template_variables["node"] = self.node_model.get_node_by_node_slug(node_slug)
         template_variables["active_page"] = "topic"
