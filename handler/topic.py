@@ -53,6 +53,7 @@ class IndexHandler(BaseHandler):
             "topics": self.topic_model.get_all_topics_count(),
             "replies": self.reply_model.get_all_replies_count(),
         }
+        template_variables["node"] = self.node_model.get_node_by_node_slug("qna")
         if(tab=="index"):
             template_variables["active_page"] = "topic"           
         else:

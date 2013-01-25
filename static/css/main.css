@@ -633,6 +633,9 @@ a.btn-small {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
+.subnav_btn{
+    padding: 6px;
+}
   .topics .topic-item {
   padding: 10px 40px 10px 10px;
   margin: 0 0 -1px 0;

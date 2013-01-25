@@ -23,19 +23,22 @@
     </li>
 </ul>
 #}
+
 <div class="subnav">
     {% if user_info: %}
     {% set tab_bar = [
         ('/', 'topic', '所有大学'),
         ('/?tab=college', 'college', college.name),                   
         ('/?tab=interest', 'interest', '兴趣小组'),
-        ('/?tab=follows', 'follows', '关注的人'),                  
+        ('/?tab=follows', 'follows', '关注的人'),
+        ('#hotnav', 'hotnav', '热门导航'),               
     ] -%}
     {% else: %}
     {% set tab_bar = [
         ('/', 'topic', '所有大学'),               
         ('/?tab=interest', 'interest', '兴趣小组'),
-        ('/?tab=follows', 'follows', '关注的人'),                  
+        ('/?tab=follows', 'follows', '关注的人'),  
+        ('#hotnav', 'hotnav', '热门导航'),                 
     ] -%}
     {% endif %}
 
@@ -46,8 +49,14 @@
             <a href="{{ href|e }}">{{ caption|e }}</a>
         </li>
         {% endfor %}
+        <div class="subnav_btn">
+            <a class="btn btn-mini fr" type="button" href="/t/create/?c={{college.id}}&n={{ node.slug }}">发起新话题</a>
+        </div>
     </ul>
+
 </div>
+
+
 
 <div class="topics container-box deprecated-mt10">
     {% for topic in topics.list %}
@@ -95,6 +104,7 @@
     <div class="pagination">{{ topics.page|pagination(request.uri) }}</div>
 </div>
 
+<section id="hotnav">
 <div class="nodes-cloud container-box mt10">
     <div class="fr"><a href="/nodes">浏览全部小组</a></div>
     <h4 class="title">热门导航</h4>
@@ -111,6 +121,7 @@
         {% endfor %}
     </ul>
 </div>
+</section>
 {% endblock %}
 
 {% block sidebar %}
