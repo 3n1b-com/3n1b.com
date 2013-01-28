@@ -60,6 +60,8 @@ HOWTO deploy on Linode
 	$ mysql -u 3n1b -p --database=3n1b < dbstructure/college.sql
 	$ mysql -u 3n1b -p --database=3n1b < dbstructure/plane.sql
 	$ mysql -u 3n1b -p --database=3n1b < dbstructure/province.sql
+	$ mysql -u 3n1b -p --database=3n1b < dbstructure/interest.sql
+	$ mysql -u 3n1b -p --database=3n1b < dbstructure/follow.sql
 
 ###Create symbolic links to conf files
 	$ cd /etc/nginx 

@@ -66,6 +66,10 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.application.interest_model
 
     @property
+    def follow_model(self):
+        return self.application.follow_model
+
+    @property
     def loader(self):
         return self.application.loader
 

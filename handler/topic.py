@@ -48,7 +48,7 @@ class IndexHandler(BaseHandler):
             if(tab=="interest"):
                 template_variables["topics"] = self.interest_model.get_user_all_interest_topics(user_id = user_info["uid"], current_page = page)
             if(tab=="follows"):
-                template_variables["topics"] = self.topic_model.get_all_topics_by_college_id(current_page = page, college_id = user_college.id)
+                template_variables["topics"] = self.follow_model.get_user_all_follow_topics(user_id = user_info["uid"], current_page = page)
         else:
             if(tab=="interest"):
                 self.redirect("/login?next=/?tab=interest")
@@ -356,19 +356,31 @@ class EditHandler(BaseHandler):
 
 class ProfileHandler(BaseHandler):
     def get(self, user, template_variables = {}):
+        current_user_info = self.current_user
         if(re.match(r'^\d+$', user)):
             user_info = self.user_model.get_user_by_uid(user)
         else:
             user_info = self.user_model.get_user_by_username(user)
-
         page = int(self.get_argument("p", "1"))
         template_variables["user_info"] = user_info
+        follow_text = "+关注"
+        show_follow = True;
         if(user_info):
             template_variables["user_info"]["counter"] = {
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
+            if(current_user_info):
+                if(user_info["uid"] == current_user_info["uid"]):
+                    show_follow = False;
+                else:
+                    show_follow = True;
+                    follow = self.follow_model.get_follow_info_by_user_id_and_follow_user_id(current_user_info["uid"], user_info["uid"])
+                    if(follow):
+                        follow_text = "取消关注"                     
+        template_variables["follow_text"] = follow_text
+        template_variables["show_follow"] = show_follow
 
         '''
         if user_info["github"]:
@@ -684,3 +696,21 @@ class FollowNodeHandler(BaseHandler):
             self.redirect("/node/"+node_slug)
         else:
             self.redirect("/login?next=/node/"+node_slug)   
+
+class FollowUserHandler(BaseHandler):
+    def get(self, user_name = None, template_variables = {}):
+        user_info = self.current_user
+        follow_user = self.user_model.get_user_by_username(user_name);
+        if(user_info):
+            follow = self.follow_model.get_follow_info_by_user_id_and_follow_user_id(user_info["uid"], follow_user["uid"])
+            if(follow):
+                self.follow_model.delete_follow_info_by_user_id_and_follow_user_id(user_info["uid"], follow_user["uid"])
+            else:
+                self.follow_model.add_new_follow({
+                    "user_id": user_info["uid"],
+                    "follow_user_id": follow_user["uid"],
+                    "created": time.strftime('%Y-%m-%d %H:%M:%S'),
+                })
+            self.redirect("/u/"+user_name)
+        else:
+            self.redirect("/login?next=/u/"+user_name)   
