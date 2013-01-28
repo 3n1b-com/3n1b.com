@@ -4,7 +4,8 @@
 <div class="topics container-box node-topics">
     <div class="ui-header">
         <a class="btn btn-small fr" type="button" href="/t/create/?c={{college.id}}&n={{ node.slug }}">发起新话题</a>
-        <span class="bread-nav">首页 › {{ node.name }}</span>
+        <span class="bread-nav" style="font-size:14px;"> <a href="/">首页</a> › {{ node.name }}</span>
+        <span class="label label-success" style="margin-left:4px"><a href="/f/node/{{ node.slug }}" style="color:#FFFFFF">{{ follow_text }}</a></span>
     </div>
 
     <div class="ui-content">

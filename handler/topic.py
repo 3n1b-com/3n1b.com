@@ -43,9 +43,17 @@ class IndexHandler(BaseHandler):
             user_college = self.college_model.get_college_by_college_name(user_info["collegename"])
             if(tab=="index"):
                 template_variables["topics"] = self.topic_model.get_all_topics(current_page = page)           
-            else:
+            if(tab=="college"):
+                template_variables["topics"] = self.topic_model.get_all_topics_by_college_id(current_page = page, college_id = user_college.id)
+            if(tab=="interest"):
+                template_variables["topics"] = self.interest_model.get_user_all_interest_topics(user_id = user_info["uid"], current_page = page)
+            if(tab=="follows"):
                 template_variables["topics"] = self.topic_model.get_all_topics_by_college_id(current_page = page, college_id = user_college.id)
         else:
+            if(tab=="interest"):
+                self.redirect("/login?next=/?tab=interest")
+            if(tab=="follows"):
+                self.redirect("/login?next=/?tab=follows")
             template_variables["topics"] = self.topic_model.get_all_topics(current_page = page);
         template_variables["college"] = user_college
         template_variables["status_counter"] = {
@@ -70,6 +78,8 @@ class NodeTopicsHandler(BaseHandler):
         page = int(self.get_argument("p", "1"))
         template_variables["user_info"] = user_info
         user_college = self.college_model.get_college_by_college_id(1001)
+        current_node = self.node_model.get_node_by_node_slug(node_slug);
+        follow_text = "+关注"
         if(user_info):
             template_variables["user_info"]["counter"] = {
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
@@ -77,9 +87,13 @@ class NodeTopicsHandler(BaseHandler):
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
             user_college = self.college_model.get_college_by_college_name(user_info["collegename"])
+            interest = self.interest_model.get_interest_info_by_user_id_and_node_id(user_info["uid"], current_node.id)
+            if(interest):
+                follow_text = "取消关注"
+        template_variables["follow_text"] = follow_text
         template_variables["college"] = user_college
         template_variables["topics"] = self.topic_model.get_all_topics_by_node_slug(current_page = page, node_slug = node_slug)
-        template_variables["node"] = self.node_model.get_node_by_node_slug(node_slug)
+        template_variables["node"] = current_node;
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
         self.render("topic/node_topics.html", **template_variables)
@@ -652,3 +666,21 @@ class CollegesHandler(BaseHandler):
         template_variables["gen_random"] = gen_random       
         template_variables["active_page"] = "colleges"  
         self.render("topic/colleges.html", **template_variables)
+
+class FollowNodeHandler(BaseHandler):
+    def get(self, node_slug = None, template_variables = {}):
+        user_info = self.current_user
+        current_node = self.node_model.get_node_by_node_slug(node_slug);
+        if(user_info):
+            interest = self.interest_model.get_interest_info_by_user_id_and_node_id(user_info["uid"], current_node["id"])
+            if(interest):
+                self.interest_model.delete_interest_info_by_user_id_and_node_id(user_info["uid"], current_node["id"])
+            else:
+                self.interest_model.add_new_interest({
+                    "user_id": user_info["uid"],
+                    "node_id": current_node["id"],
+                    "created": time.strftime('%Y-%m-%d %H:%M:%S'),
+                })
+            self.redirect("/node/"+node_slug)
+        else:
+            self.redirect("/login?next=/node/"+node_slug)   
