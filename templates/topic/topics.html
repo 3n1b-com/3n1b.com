@@ -99,6 +99,11 @@
     </div>
     {% endfor %}
     <div class="pagination">{{ topics.page|pagination(request.uri) }}</div>
+    {% if topics.page.total == 0 %}
+        <div class="pl10 pr10">
+            <div class="alert mt20">{{ notice_text }}</div>
+        </div>
+    {% endif %}
 </div>
 
 <section id="hotnav">
