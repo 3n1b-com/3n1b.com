@@ -2,8 +2,6 @@
 # coding=utf-8
 #
 # Copyright 2013 3n1b.com
-# Do have a faith in what you're doing.
-# Make your life a story worth telling.
 
 import time
 from lib.query import Query

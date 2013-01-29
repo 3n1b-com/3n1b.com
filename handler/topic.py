@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 #
-# Copyright 2012 F2E.im
-# Do have a faith in what you're doing.
-# Make your life a story worth telling.
+# Copyright 2013 3n1b.com
 
 import uuid
 import hashlib
@@ -76,7 +74,7 @@ class IndexHandler(BaseHandler):
         if (tab == "interest"):
             notice_text = "你关注的小组暂时还没有话题，发出你的讨论吧。"
         if (tab == "follows"):
-            notice_text = "你关注的人暂时还没有话题，发出你的讨论吧。"
+            notice_text = "你关注的同学暂时还没有话题，发出你的讨论吧。"
         template_variables["notice_text"] = notice_text
         self.render("topic/topics.html", **template_variables)
 
