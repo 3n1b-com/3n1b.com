@@ -311,13 +311,15 @@ class CreateMessageHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, username = None, template_variables = {}):
         user_info = self.current_user
+        to_user = self.user_model.get_user_by_username(username)
+        if (user_info["uid"] == to_user["uid"]):
+            self.redirect("/")
         template_variables["user_info"] = user_info
         template_variables["user_info"]["counter"] = {
             "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
             "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
             "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
-        }
-        to_user = self.user_model.get_user_by_username(username)
+        }       
         template_variables["to_user"] = to_user
         template_variables["gen_random"] = gen_random
         page = int(self.get_argument("p", "1"))
