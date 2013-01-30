@@ -124,6 +124,9 @@
                 <dd>{{ user_info.signature }}</dd>
             </dl>
             {% endif %}
+            {% if show_follow %}
+                <span class="label label-warning pull-right" style="margin-left:4px"><a href="/m/{{user_info.username}}" style="color:#FFFFFF">私信</a></span>
+            {% endif %}
         </div>
     </div>
     {% if user_info.github %}

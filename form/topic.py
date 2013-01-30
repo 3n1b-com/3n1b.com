@@ -30,3 +30,8 @@ class ReplyEditForm(Form):
     content = TextField('Content', [
         validators.Required(message = "请填写回复内容"),
     ])
+
+class CreateMessageForm(Form):
+    content = TextField('Content', [
+        validators.Required(message = "请填写帖子内容"),
+    ])

@@ -168,6 +168,15 @@
     </span>
 </div>
 {% endif %}
+{% if user_info.counter.messages %}
+<div class="alert alert-success mt10 mb10">
+    <span>
+        <a href="/messages" style="color: #468847;">
+            {{ user_info.nickname or user_info.username }}，你有{{ user_info.counter.messages }}条私信提醒，去看看吧
+        </a>
+    </span>
+</div>
+{% endif %}
     {% else %}
 <div class="login-box container-box">
     <div class="ui-content tc">

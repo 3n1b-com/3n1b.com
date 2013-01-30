@@ -68,6 +68,10 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.application.follow_model
 
     @property
+    def message_model(self):
+        return self.application.message_model
+
+    @property
     def loader(self):
         return self.application.loader
 

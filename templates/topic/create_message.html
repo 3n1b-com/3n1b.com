@@ -1,0 +1,109 @@
+{% extends 'snippet/layout.html' %}
+
+{% block javascript %}
+<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+    </script>
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="/static/js/widget/emmet.min.js"></script>
+<script type="text/javascript" src="/static/js/widget/jquery.textarea.min.js"></script>
+<script type="text/javascript">
+        jQuery(document).ready(function() {
+            $('textarea.smart-code-support').tabby();
+            emmet.require('textarea').setup({
+                pretty_break: false, // enable formatted line breaks (when inserting // between opening and closing tag)
+                use_tab: false       // expand abbreviations by Tab key
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+<div class="topic-create container-box">
+    <div class="ui-header">
+        <span class="title">发送私信给 <span class="label label-success"><a href="/u/{{ to_user.username }}" style="color:#FFFFFF">{{ to_user.username }}</a></span></span>    
+    </div>
+    <div class="ui-content">
+        <form class="mt10" action="/m/{{ to_user.username }}" method="post">
+            {{ errors|dump_errors }}
+            <textarea rows="3" class="content mt5 smart-code-support" placeholder="输入私信内容" name="content" style="width: 640px; height: 54px;"></textarea>
+            <input type="submit" id="checkall" class="btn btn-small" value="立即发送">{{ xsrf_form_html() }}</form>          
+    </div>
+    <div class="ui-header">
+        <span class="title">与 <span class="label label-success" ><a href="/u/{{ to_user.username }}" style="color:#FFFFFF">{{ to_user.username }}</a></span> 的私信记录：</span>
+    </div>
+    <div class="ui-content">
+    {% for message in messages.list %}
+        <div class="notification-item">
+            <a href="/u/{{ message.from_user_username }}">
+                <img src="/static/avatar/m_{{ message.from_user_avatar or 'default.png' }}" alt="" class="avatar" />
+            </a>
+            <div class="main">
+                <span class="title">
+                    <a href="/u/{{ message.from_user_username }}">
+                        {% if message.from_user_username == user_info.username: %}
+                            我
+                        {% else: %}
+                            {{ message.from_user_username }}
+                        {% endif %}
+                    </a>
+                    发送给
+                    <a href="/t/{{ message.to_user_username }}">
+                        {% if message.to_user_username == user_info.username: %}
+                            我
+                        {% else: %}
+                            {{ message.to_user_username }}
+                        {% endif %}
+                    </a>
+                </span>
+                <div class="content">{{ message.content }}</div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if messages.page.total == 0 %}
+        <div class="pl10 pr10">
+            <div class="alert mt20">您暂时还没有私信。</div>
+        </div>
+        {% endif %}        
+    </div>
+    <div class="ui-footer">
+        <div class="pagination">{{ messages.page|pagination(request.uri) }}</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="usercard container-box">
+    <div class="ui-header">
+        <a href="/u/{{ user_info.username }}">
+            <img src="/static/avatar/m_{{ user_info.avatar or 'default.png' }}?t={{ gen_random() }}" alt="" class="avatar" />
+        </a>
+        <div class="username">{{ user_info.username }}</div>
+        <div class="collegename">{{ user_info.collegename }}</div>
+        <div class="website">
+            <a href="{{ user_info.website or '' }}">{{ user_info.website or '' }}</a>
+        </div>
+    </div>
+    <div class="ui-content">
+        <div class="status status-topic"> <strong><a href="/u/{{ user_info.username }}/topics">{{ user_info.counter.topics }}</a></strong> 
+            话题
+        </div>
+        <div class="status status-reply"> <strong><a href="/u/{{ user_info.username }}/replies">{{ user_info.counter.replies }}</a></strong> 
+            回复
+        </div>
+        <div class="status status-favorite">
+            <strong>
+                <a href="/u/{{ user_info.username }}/favorites">{{ user_info.counter.favorites }}</a>
+            </strong>
+            收藏
+        </div>
+        <div class="status status-reputation">
+            <strong>{{ user_info.reputation or 0 }}</strong>
+            声望
+        </div>
+    </div>
+</div>
+{% endblock %}
