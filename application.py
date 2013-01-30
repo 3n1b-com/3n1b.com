@@ -24,6 +24,7 @@ import handler.user
 import handler.topic
 import handler.page
 import handler.notification
+import handler.message
 
 from tornado.options import define, options
 from lib.loader import Loader
@@ -81,8 +82,8 @@ class Application(tornado.web.Application):
             (r"/s/node/(.*)", handler.topic.NodesHandler),
             (r"/f/node/(.*)", handler.topic.FollowNodeHandler),
             (r"/f/user/(.*)", handler.topic.FollowUserHandler),
-            (r"/m/(.*)", handler.topic.CreateMessageHandler),
-            (r"/messages", handler.topic.MessagesHandler),
+            (r"/m/(.*)", handler.message.CreateMessageHandler),
+            (r"/messages", handler.message.MessagesHandler),
 
             (r"/(favicon\.ico)", tornado.web.StaticFileHandler, dict(path = settings["static_path"])),
             (r"/(sitemap.*$)", tornado.web.StaticFileHandler, dict(path = settings["static_path"])),
