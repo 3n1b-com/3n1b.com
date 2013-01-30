@@ -62,6 +62,7 @@ HOWTO deploy on Linode
 	$ mysql -u 3n1b -p --database=3n1b < dbstructure/province.sql
 	$ mysql -u 3n1b -p --database=3n1b < dbstructure/interest.sql
 	$ mysql -u 3n1b -p --database=3n1b < dbstructure/follow.sql
+	$ mysql -u 3n1b -p --database=3n1b < dbstructure/message.sql
 
 ###Create symbolic links to conf files
 	$ cd /etc/nginx 
