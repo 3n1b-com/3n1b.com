@@ -77,6 +77,7 @@ class IndexHandler(BaseHandler):
         if (tab == "follows"):
             notice_text = "你关注的同学暂时还没有话题，发出你的讨论吧。"
         template_variables["notice_text"] = notice_text
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/topics.html", **template_variables)
 
 class NodeTopicsHandler(BaseHandler):
@@ -103,6 +104,10 @@ class NodeTopicsHandler(BaseHandler):
         template_variables["node"] = current_node;
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
+        wallpaper = current_node["custom_style"]
+        if (wallpaper == ""):
+            wallpaper = self.get_wallpaper()
+        template_variables["wallpaper"] = wallpaper
         self.render("topic/node_topics.html", **template_variables)
 
 class CollegeTopicsHandler(BaseHandler):
@@ -121,6 +126,7 @@ class CollegeTopicsHandler(BaseHandler):
         template_variables["node"] = self.node_model.get_node_by_node_slug("qna")
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/college_topics.html", **template_variables)
 
 class ViewHandler(BaseHandler):
@@ -156,6 +162,7 @@ class ViewHandler(BaseHandler):
             "hits": (template_variables["topic"]["hits"] or 0) + 1,
         })
 
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/view.html", **template_variables)
 
     @tornado.web.authenticated
@@ -264,6 +271,7 @@ class CreateHandler(BaseHandler):
         template_variables["node"] = node
         template_variables["college"] = college
         template_variables["active_page"] = "topic"
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/create.html", **template_variables)
 
     @tornado.web.authenticated
@@ -320,6 +328,7 @@ class EditHandler(BaseHandler):
         template_variables["topic"] = self.topic_model.get_topic_by_topic_id(topic_id)
         template_variables["gen_random"] = gen_random
         template_variables["active_page"] = "topic"
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/edit.html", **template_variables)
 
     @tornado.web.authenticated
@@ -400,6 +409,7 @@ class ProfileHandler(BaseHandler):
         template_variables["replies"] = self.reply_model.get_user_all_replies(user_info["uid"], current_page = page)
         template_variables["gen_random"] = gen_random
         template_variables["active_page"] = "_blank"
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/profile.html", **template_variables)
 
 class VoteHandler(BaseHandler):
@@ -466,6 +476,7 @@ class UserTopicsHandler(BaseHandler):
         template_variables["topics"] = self.topic_model.get_user_all_topics(user_info["uid"], current_page = page)
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/user_topics.html", **template_variables)
 
 class UserRepliesHandler(BaseHandler):
@@ -486,6 +497,7 @@ class UserRepliesHandler(BaseHandler):
         template_variables["replies"] = self.reply_model.get_user_all_replies(user_info["uid"], current_page = page)
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/user_replies.html", **template_variables)
 
 class UserFavoritesHandler(BaseHandler):
@@ -506,6 +518,7 @@ class UserFavoritesHandler(BaseHandler):
         template_variables["favorites"] = self.favorite_model.get_user_all_favorites(user_info["uid"], current_page = page)
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/user_favorites.html", **template_variables)
 
 class ReplyEditHandler(BaseHandler):
@@ -521,6 +534,7 @@ class ReplyEditHandler(BaseHandler):
         template_variables["reply"] = self.reply_model.get_reply_by_reply_id(reply_id)
         template_variables["gen_random"] = gen_random
         template_variables["active_page"] = "topic"
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/reply_edit.html", **template_variables)
 
     @tornado.web.authenticated
@@ -618,6 +632,7 @@ class MembersHandler(BaseHandler):
         template_variables["active_members"] = self.user_model.get_users_by_last_login(num = 49)
         template_variables["gen_random"] = gen_random
         template_variables["active_page"] = "members"
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/members.html", **template_variables)
 
 class NodesHandler(BaseHandler):
@@ -649,7 +664,8 @@ class NodesHandler(BaseHandler):
         template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
         template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
         template_variables["gen_random"] = gen_random 
-        template_variables["active_page"] = "nodes"      
+        template_variables["active_page"] = "nodes"  
+        template_variables["wallpaper"] = self.get_wallpaper()    
         self.render("topic/nodes.html", **template_variables)
 
 class CollegesHandler(BaseHandler):
@@ -683,7 +699,8 @@ class CollegesHandler(BaseHandler):
         template_variables["provinces"] = self.province_model.get_all_provinces_with_colleges()
         template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
         template_variables["gen_random"] = gen_random       
-        template_variables["active_page"] = "colleges"  
+        template_variables["active_page"] = "colleges" 
+        template_variables["wallpaper"] = self.get_wallpaper() 
         self.render("topic/colleges.html", **template_variables)
 
 class FollowNodeHandler(BaseHandler):

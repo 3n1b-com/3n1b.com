@@ -40,6 +40,6 @@ class ListHandler(BaseHandler):
 
         # mark user unread notifications as read
         self.notification_model.mark_user_unread_notification_as_read(user_info["uid"])
-
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("notification/notifications.html", **template_variables)
 

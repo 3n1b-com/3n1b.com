@@ -42,6 +42,7 @@ class CreateMessageHandler(BaseHandler):
         page = int(self.get_argument("p", "1"))
         template_variables["messages"] = self.message_model.get_messages(user_info["uid"], to_user["uid"], current_page = page)
         self.message_model.mark_user_unread_message_as_read(user_info["uid"])
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("message/create_message.html", **template_variables)
 
     @tornado.web.authenticated
@@ -87,4 +88,5 @@ class MessagesHandler(BaseHandler):
         page = int(self.get_argument("p", "1"))
         template_variables["messages"] = self.message_model.get_user_all_messages(user_info["uid"], current_page = page)
         self.message_model.mark_user_unread_message_as_read(user_info["uid"])
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("message/messages.html", **template_variables)

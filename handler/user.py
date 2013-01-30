@@ -54,6 +54,7 @@ class SettingHandler(BaseHandler):
         user_info = self.get_current_user()
         template_variables["user_info"] = user_info
         template_variables["gen_random"] = gen_random
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("user/setting.html", **template_variables)
 
     @tornado.web.authenticated
@@ -94,6 +95,7 @@ class SettingAvatarHandler(BaseHandler):
         user_info = self.get_current_user()
         template_variables["user_info"] = user_info
         template_variables["gen_random"] = gen_random
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("user/setting_avatar.html", **template_variables)
 
     @tornado.web.authenticated
@@ -150,12 +152,14 @@ class SettingAvatarFromGravatarHandler(BaseHandler):
         updated = self.user_model.set_user_base_info_by_uid(user_id, {"updated": time.strftime('%Y-%m-%d %H:%M:%S')})
         template_variables["user_info"] = user_info
         template_variables["gen_random"] = gen_random
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("user/setting_avatar.html", **template_variables)
 
 class SettingPasswordHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, template_variables = {}):
         user_info = self.get_current_user()
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("user/setting_password.html", **template_variables)
 
     @tornado.web.authenticated
@@ -194,6 +198,7 @@ class SettingPasswordHandler(BaseHandler):
 class ForgotPasswordHandler(BaseHandler):
     def get(self, template_variables = {}):
         do_logout(self)
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("user/forgot_password.html", **template_variables)
 
     def post(self, template_variables = {}):
@@ -238,6 +243,7 @@ class ForgotPasswordHandler(BaseHandler):
 class LoginHandler(BaseHandler):
     def get(self, template_variables = {}):
         do_logout(self)
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("user/login.html", **template_variables)
 
     def post(self, template_variables = {}):
@@ -282,6 +288,7 @@ class LogoutHandler(BaseHandler):
 class RegisterHandler(BaseHandler):
     def get(self, template_variables = {}):
         do_logout(self)
+        template_variables["wallpaper"] = self.get_wallpaper()
         self.render("user/register.html", **template_variables)
 
     def post(self, template_variables = {}):

@@ -19,4 +19,5 @@ from lib.variables import *
 
 class AboutHandler(BaseHandler):
     def get(self, template_variables = {}):
+    	template_variables["wallpaper"] = self.get_wallpaper()
         self.render("page/about.html", **template_variables)
