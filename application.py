@@ -84,6 +84,10 @@ class Application(tornado.web.Application):
             (r"/f/user/(.*)", handler.topic.FollowUserHandler),
             (r"/m/(.*)", handler.message.CreateMessageHandler),
             (r"/messages", handler.message.MessagesHandler),
+            (r"/about", handler.page.AboutHandler),
+            (r"/license", handler.page.AboutHandler),
+            (r"/feedback", handler.page.AboutHandler),
+            (r"/guide", handler.page.AboutHandler),
 
             (r"/(favicon\.ico)", tornado.web.StaticFileHandler, dict(path = settings["static_path"])),
             (r"/(sitemap.*$)", tornado.web.StaticFileHandler, dict(path = settings["static_path"])),
