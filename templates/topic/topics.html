@@ -56,6 +56,27 @@
 </div>
 
 <div class="topics container-box deprecated-mt10">
+    {% if active_page== 'interest' %}
+    <div class="alert alert-success" style="margin-bottom: 0px">
+        <a class="close" data-dismiss="alert">×</a>
+        <span>
+            <a href="/?tab=interest" style="color: #468847;">
+                这里列出了你所关注的小组下的最新话题
+            </a>
+        </span>
+    </div>
+    {% endif %}
+    {% if active_page== 'follows' %}
+    <div class="alert alert-success" style="margin-bottom: 0px">
+        <a class="close" data-dismiss="alert">×</a>
+        <span>
+            <a href="/?tab=follows" style="color: #468847;">
+                这里列出了你所关注的同学的最新话题
+            </a>
+        </span>
+    </div>
+    {% endif %}
+    
     {% for topic in topics.list %}
     <div class="topic-item">
         <a href="/u/{{ topic.author_username }}">
