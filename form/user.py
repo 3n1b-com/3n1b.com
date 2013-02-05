@@ -9,9 +9,9 @@ from lib.forms import Form
 class RegisterForm(Form):
     username = TextField('Username', [
         validators.Required(message = "必须填写用户名"),
-        validators.Length(min = 3, message = "用户名长度过短（3-12个字符）"),
-        validators.Length(max = 12, message = "用户名长度过长（3-12个字符）"),
-        validators.Regexp("^[a-zA-Z][a-zA-Z0-9_]*$", message = "用户名格式错误（英文字母开头，数字，下划线构成）"),
+        validators.Length(min = 4, message = "用户名长度过短（4-16个字符）"),
+        validators.Length(max = 16, message = "用户名长度过长（4-16个字符）"),
+        validators.Regexp(u"^(?!_)(?!.*?_$)(?!\d+)[a-zA-Z0-9_\u4e00-\u9fa5]+$", message = "用户名格式错误（中英文，数字，'_'构成，'_'不可在首尾，也不能全为数字）"),
     ])
 
     collegename = TextField('Collegename', [

@@ -222,6 +222,7 @@ class ViewHandler(BaseHandler):
         # create @username notification
 
         for username in set(find_mentions(form.content.data)):
+            print username
             mentioned_user = self.user_model.get_user_by_username(username)
 
             if not mentioned_user:
