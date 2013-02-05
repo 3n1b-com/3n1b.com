@@ -40,7 +40,7 @@
                     <a href="/t/{{ notification.involved_topic_id }}">{{ notification.involved_topic_title }}</a>
                 </span>
                 {% endif %}
-                <div class="content">{{ notification.content|markdown|content_process }}</div>
+                <div class="content">{{ notification.content|markdown|reply_process }}</div>
             </div>
         </div>
         {% endfor %}
