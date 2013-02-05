@@ -160,7 +160,7 @@
                         <img src="/static/images/reply.png" alt="" />
                     </span>
                 </div>
-                <span class="content">{{ reply.content|markdown|content_process }}</span>
+                <span class="content">{{ reply.content|markdown|reply_process }}</span>
             </div>
         </div>
         {% endfor %}
