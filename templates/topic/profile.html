@@ -68,48 +68,14 @@
             </div>
         </div>
         <div class="ui-content">
-            <dl>
-                <dt>ID</dt>
-                <dd>{{ user_info.username }}</dd>
-            </dl>
-            {% if user_info.nickname %}
-            <dl>
-                <dt>名号</dt>
-                <dd>{{ user_info.nickname }}</dd>
-            </dl>
-            {% endif %}
+            
                 {% if user_info.location %}
             <dl>
                 <dt>城市</dt>
                 <dd>{{ user_info.location }}</dd>
             </dl>
             {% endif %}
-                {% if user_info.company %}
-            <dl>
-                <dt>公司</dt>
-                <dd>{{ user_info.company }}</dd>
-            </dl>
-            {% endif %}
-            <dl>
-                <dt>Email</dt>
-                <dd>{{ user_info.email }}</dd>
-            </dl>
-            {% if user_info.twitter %}
-            <dl>
-                <dt>Twitter</dt>
-                <dd>
-                    <a href="http://twitter.com/{{ user_info.twitter }}">http://twitter.com/{{ user_info.twitter }}</a>
-                </dd>
-            </dl>
-            {% endif %}
-                {% if user_info.github %}
-            <dl>
-                <dt>Github</dt>
-                <dd>
-                    <a href="http://github.com/{{ user_info.github }}">http://github.com/{{ user_info.github }}</a>
-                </dd>
-            </dl>
-            {% endif %}
+               
                 {% if user_info.website %}
             <dl>
                 <dt>Blog</dt>
@@ -129,29 +95,6 @@
             {% endif %}
         </div>
     </div>
-    {% if user_info.github %}
-    <div class="project-lists container-box mt10">
-        <div class="ui-header">
-            <span class="title">开源项目</span>
-        </div>
-        <div class="ui-content J_githubContainer">
-            {#
-            <ul>
-                {% for repo in github_repos if not repo.fork %}
-                <li>
-                    <div class="title">
-                        <a href="{{ repo.svn_url }}" rel="nofollow" target="_blank">{{ repo.name }}</a>
-                        <span class="watchers" title="{{ repo.watchers }} Watchers">{{ repo.watchers }}</span>
-                    </div>
-                    <p class="desc">{{ repo.description }}</p>
-                </li>
-                {% endfor %}
-            </ul>
-            #}
-            <img src="/static/images/ajax-loader.gif" alt="" class="mt5" />
-        </div>
-    </div>
-    {% endif %}
 
         {% if not topics.page.total == 0 %}
     <div class="topic-lists container-box mt10">
