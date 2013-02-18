@@ -140,7 +140,7 @@ CREATE TABLE `user` (
   `douban` text,
   `last_login` datetime DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=169 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 delimiter ;;
 CREATE TRIGGER `user_delete_trigger` BEFORE DELETE ON `user` FOR EACH ROW BEGIN
         DELETE FROM topic WHERE topic.author_id = OLD.uid;
