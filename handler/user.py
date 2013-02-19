@@ -331,7 +331,7 @@ class RegisterHandler(BaseHandler):
         # validate college name
         if duplicated_collegename is None:
             template_variables["errors"] = {}
-            template_variables["errors"]["duplicated_collegename"] = [u"学校名称不正确"]
+            template_variables["errors"]["duplicated_collegename"] = [u"学校名称不正确（进入所有学校页面 3n1b.com/colleges 核对你想输入的学校名称）"]
             self.get(template_variables)
             return
 
