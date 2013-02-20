@@ -69,13 +69,13 @@ class IndexHandler(BaseHandler):
         template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
         template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
         template_variables["gen_random"] = gen_random    
-        notice_text = "暂时还没有话题，发出你的讨论吧。"
+        notice_text = "暂时还没有话题，发出您的讨论吧。"
         if (tab == "college"):
-            notice_text = "你学校下暂时还没有话题，发出你的讨论吧。"
+            notice_text = "你学校下暂时还没有话题，发出您的讨论吧。"
         if (tab == "interest"):
-            notice_text = "你关注的小组暂时还没有话题，发出你的讨论吧。"
+            notice_text = "这里列出了您所关注小组下的最新话题，暂时还没有话题，发出您的讨论吧。"
         if (tab == "follows"):
-            notice_text = "你关注的同学暂时还没有话题，发出你的讨论吧。"
+            notice_text = "这里列出了您所关注同学的最新话题，暂时还没有话题，发出你的讨论吧。"
         template_variables["notice_text"] = notice_text
         template_variables["wallpaper"] = self.get_wallpaper()
         self.render("topic/topics.html", **template_variables)
@@ -258,6 +258,8 @@ class CreateHandler(BaseHandler):
     @tornado.web.authenticated
     def get(self, college_node = None, template_variables = {}):
         user_info = self.current_user
+        if (user_info["collegename"]=="请设置您的学校"):
+            self.redirect(self.get_argument("next", "/register/college"))
         template_variables["user_info"] = user_info
         template_variables["user_info"]["counter"] = {
             "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),

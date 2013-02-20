@@ -306,7 +306,7 @@ class RegisterHandler(BaseHandler):
 
         duplicated_email = self.user_model.get_user_by_email(form.email.data)
         duplicated_username = self.user_model.get_user_by_username(form.username.data)
-        duplicated_collegename = self.college_model.get_college_by_college_name(form.collegename.data)
+        #duplicated_collegename = self.college_model.get_college_by_college_name(form.collegename.data)
 
         if(duplicated_email or duplicated_username):
             template_variables["errors"] = {}
@@ -329,11 +329,11 @@ class RegisterHandler(BaseHandler):
             return
 
         # validate college name
-        if duplicated_collegename is None:
-            template_variables["errors"] = {}
-            template_variables["errors"]["duplicated_collegename"] = [u"学校名称不正确（进入所有学校页面 3n1b.com/colleges 核对你想输入的学校名称）"]
-            self.get(template_variables)
-            return
+        #if duplicated_collegename is None:
+         #   template_variables["errors"] = {}
+          #  template_variables["errors"]["duplicated_collegename"] = [u"学校名称不正确（进入所有学校页面 3n1b.com/colleges 核对你想输入的学校名称）"]
+           # self.get(template_variables)
+           # return
 
         # continue while validate succeed
 
@@ -343,7 +343,7 @@ class RegisterHandler(BaseHandler):
             "email": form.email.data,
             "password": secure_password,
             "username": form.username.data,
-            "collegename": form.collegename.data,
+            "collegename": "请设置您的学校",
             "created": time.strftime('%Y-%m-%d %H:%M:%S')
         }
 
@@ -361,5 +361,41 @@ class RegisterHandler(BaseHandler):
             mail_content = self.render_string("user/register_mail.html")
             send(mail_title, mail_content, form.email.data)
 
-        self.redirect(self.get_argument("next", "/"))
+        self.redirect(self.get_argument("next", "/register/college"))
 
+class RegisterCollegeHandler(BaseHandler):
+    def get(self, template_variables = {}):
+        user_info = self.current_user
+        template_variables["user_info"] = user_info
+        if(user_info):
+            template_variables["user_info"]["counter"] = {
+                "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
+                "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+            }
+        template_variables["status_counter"] = {
+            "users": self.user_model.get_all_users_count(),
+            "nodes": self.node_model.get_all_nodes_count(),
+            "topics": self.topic_model.get_all_topics_count(),
+            "replies": self.reply_model.get_all_replies_count(),
+        }
+        college_prefix = "/register/college/?c="
+        template_variables["college_prefix"] = college_prefix 
+        template_variables["provinces"] = self.province_model.get_all_provinces_with_colleges()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
+        template_variables["gen_random"] = gen_random       
+        template_variables["active_page"] = "colleges" 
+        template_variables["wallpaper"] = self.get_wallpaper() 
+        self.render("user/registercollege.html", **template_variables)
+
+class SetCollegeHandler(BaseHandler):
+    def get(self, college = None, template_variables = {}):
+        user_info = self.current_user
+        template_variables["user_info"] = user_info
+        college_id = self.get_argument('c', "0")
+        college = self.college_model.get_college_by_college_id(college_id)
+        collegename = college["name"]
+        print collegename
+        update_result = self.user_model.set_user_collegename_by_uid(user_info["uid"], collegename)
+        self.redirect(self.get_argument("next", "/"))

@@ -85,3 +85,8 @@ class UserModel(Query):
         order = "last_login DESC"
         return self.order(order).limit(num).pages(list_rows = num)
 
+    def set_user_collegename_by_uid(self, uid, collegename):
+        where = "uid = %s" % uid
+        return self.data({
+            "collegename": collegename
+        }).where(where).save()

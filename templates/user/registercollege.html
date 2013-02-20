@@ -1,0 +1,20 @@
+{% extends 'snippet/layout.html' %}
+
+{% block main %}
+
+<div class="nodes-cloud container-box mt10">
+    <h4 class="title" style="color:#000000; font-size: 14px;">点击下方学校名，设置您的大学，完成注册！</h4>
+    <ul>
+        {% for province in provinces %}
+        <li>
+            <label for="">{{ province.name }}</label>
+            <span class="nodes">
+                {% for college in province.colleges %}
+                <span class="label label-success"><a href="{{ college_prefix }}{{ college.id }}" style="color:#ffffff">{{ college.name }}</a></span>
+                {% endfor %}
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

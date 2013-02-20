@@ -1,31 +1,8 @@
 {% extends 'snippet/layout.html' %}
 
 {% block main %}
-    {#
-<ul class="news container-box">
-    <li>
-        <a href="#">HTML5(目前)无法帮你实现的五件事</a>
-    </li>
-    <li>
-        <a href="#">DNS优化的原理和方法</a>
-    </li>
-    <li>
-        <a href="#">浅谈互联网产品前期设计方法</a>
-    </li>
-    <li>
-        <a href="#">如何在Google成为优秀的产品经理?</a>
-    </li>
-    <li>
-        <a href="#">页面前端的水有多深？</a>
-    </li>
-    <li>
-        <a href="#">如何利用互联网工具调研网站</a>
-    </li>
-</ul>
-#}
-
 <div class="subnav">
-    {% if user_info: %}
+    {% if user_info and college: %}
     {% set tab_bar = [
         ('/', 'topic', '所有大学'),
         ('/?tab=college', 'college', college.name),                   
@@ -56,22 +33,12 @@
 </div>
 
 <div class="topics container-box deprecated-mt10">
-    {% if active_page== 'interest' %}
+    {% if not college %}
     <div class="alert alert-success" style="margin-bottom: 0px">
         <a class="close" data-dismiss="alert">×</a>
         <span>
-            <a href="/?tab=interest" style="color: #468847;">
-                这里列出了你所关注的小组下的最新话题
-            </a>
-        </span>
-    </div>
-    {% endif %}
-    {% if active_page== 'follows' %}
-    <div class="alert alert-success" style="margin-bottom: 0px">
-        <a class="close" data-dismiss="alert">×</a>
-        <span>
-            <a href="/?tab=follows" style="color: #468847;">
-                这里列出了你所关注的同学的最新话题
+            <a href="/register/college" style="color: #468847;">
+                您尚未设置您的学校，点击本链接进行设置，完成注册！
             </a>
         </span>
     </div>
@@ -184,7 +151,7 @@
 <div class="alert mt10 mb10">
     <span>
         <a href="/notifications">
-            {{ user_info.nickname or user_info.username }}，你有{{ user_info.counter.notifications }}条未读提醒，去看看吧
+            {{ user_info.nickname or user_info.username }}，您有{{ user_info.counter.notifications }}条未读提醒，去看看吧
         </a>
     </span>
 </div>
@@ -193,7 +160,7 @@
 <div class="alert alert-success mt10 mb10">
     <span>
         <a href="/messages" style="color: #468847;">
-            {{ user_info.nickname or user_info.username }}，你有{{ user_info.counter.messages }}条私信提醒，去看看吧
+            {{ user_info.nickname or user_info.username }}，您有{{ user_info.counter.messages }}条私信提醒，去看看吧
         </a>
     </span>
 </div>

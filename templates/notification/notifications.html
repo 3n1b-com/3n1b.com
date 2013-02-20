@@ -31,12 +31,12 @@
                     <a href="/u/{{ notification.trigger_username }}">{{ notification.trigger_username }}</a>
                     在
                     <a href="/t/{{ notification.involved_topic_id }}">{{ notification.involved_topic_title }}</a>
-                    中提到了你
+                    中提到了您
                 </span>
                 {% elif notification.involved_type == 1 %}
                 <span class="title">
                     <a href="/u/{{ notification.trigger_username }}">{{ notification.trigger_username }}</a>
-                    回复了你的主题
+                    回复了您的主题
                     <a href="/t/{{ notification.involved_topic_id }}">{{ notification.involved_topic_title }}</a>
                 </span>
                 {% endif %}

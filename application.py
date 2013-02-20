@@ -78,6 +78,8 @@ class Application(tornado.web.Application):
             (r"/login", handler.user.LoginHandler),
             (r"/logout", handler.user.LogoutHandler),
             (r"/register", handler.user.RegisterHandler),
+            (r"/register/college", handler.user.RegisterCollegeHandler),
+            (r"/register/college/(.*)", handler.user.SetCollegeHandler),
             (r"/s/college/(.*)", handler.topic.CollegesHandler),
             (r"/s/node/(.*)", handler.topic.NodesHandler),
             (r"/f/node/(.*)", handler.topic.FollowNodeHandler),

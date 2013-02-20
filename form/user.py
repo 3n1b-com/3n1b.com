@@ -14,10 +14,6 @@ class RegisterForm(Form):
         validators.Regexp(u"^(?!_)(?!.*?_$)(?!\d+)[a-zA-Z0-9_\u4e00-\u9fa5]+$", message = "用户名格式错误（中英文，数字，'_'构成，'_'不可在首尾，也不能全为数字）"),
     ])
 
-    collegename = TextField('Collegename', [
-        validators.Required(message = "必须填写学校"),
-    ])
-
     email = TextField('Email', [
         validators.Required(message = "必须填写Email"),
         validators.Length(min = 4, message = "Email长度有误"),
