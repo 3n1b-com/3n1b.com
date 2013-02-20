@@ -311,6 +311,10 @@ class CreateHandler(BaseHandler):
 
         reply_id = self.topic_model.add_new_topic(topic_info)
 
+        # update toptic count of the node
+        topic_count = node["topic_count"] + 1
+        self.node_model.set_node_topic_count_by_node_slug(node_slug, topic_count)
+        
         # update reputation of topic author
         reputation = self.current_user["reputation"] or 0
         reputation = reputation - 5

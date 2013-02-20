@@ -20,7 +20,8 @@ class PlaneModel(Query):
 
         for plane in planes:
             where = "plane_id = %s" % plane["id"]
-            plane["nodes"] = self.table("node").where(where).select()
+            order = "node.topic_count DESC"
+            plane["nodes"] = self.table("node").where(where).order(order).select()
 
         return planes
 

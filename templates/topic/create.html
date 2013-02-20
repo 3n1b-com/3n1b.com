@@ -23,7 +23,11 @@
 {% block main %}
 <div class="topic-create container-box">
     <div class="ui-header">
-        <span class="title">创建新话题</span>
+        <span class="title">创建新话题 
+            <span class="label label-success" style="margin-left:8px">
+                <a href="/" style="color:#FFFFFF">发帖指南</a>
+            </span>
+        </span>
     </div>
 
     <div class="ui-content">
@@ -49,7 +53,9 @@
                     <li><a href="/s/node/?c={{college.id}}&n={{ node.slug }}">修改小组...</a></li>
                 </ul>
             </div>
-            <input type="submit" id="checkall" class="btn btn-small" value="立即创建">{{ xsrf_form_html() }}</form>          
+            <input type="submit" id="checkall" class="btn btn-small" value="立即创建">{{ xsrf_form_html() }}
+             
+        </form>             
     </div>
 
 </div>

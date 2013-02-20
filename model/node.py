@@ -33,3 +33,9 @@ class NodeModel(Query):
         group = "node.id"
         return self.where(where).join(join).order(order).group(group).limit(16).select()
 
+    def set_node_topic_count_by_node_slug(self, node_slug, topic_count):
+        where = "slug = '%s'" % node_slug
+        return self.data({
+            "topic_count": topic_count
+        }).where(where).save()
+
