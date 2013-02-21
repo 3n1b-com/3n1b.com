@@ -31,8 +31,8 @@
             $('.J_topicVote').click(function(e) {
                 var _node = $(this);
                 var _errorMap = {
-                    topic_not_exist: '主题不存在',
-                    can_not_vote_your_topic: '不能喜欢自己的主题',
+                    topic_not_exist: '话题不存在',
+                    can_not_vote_your_topic: '不能喜欢自己的话题',
                     already_voted: '感谢已经表示过',
                 };
                 e.preventDefault();
@@ -48,8 +48,8 @@
             $('.J_topicFavorite').click(function(e) {
                 var _node = $(this);
                 var _errorMap = {
-                    topic_not_exist: '主题不存在',
-                    can_not_favorite_your_topic: '不能收藏自己的主题',
+                    topic_not_exist: '话题不存在',
+                    can_not_favorite_your_topic: '不能收藏自己的话题',
                     already_favorited: '之前已经收藏过了',
                 };
                 e.preventDefault();
@@ -128,7 +128,7 @@
         <a href="#" onclick="window.open('http://service.weibo.com/share/share.php?url=http://{{ request.host }}{{ request.uri }}&title={叁年壹班}%20-%20{{ topic.title }}', '_blank', 'width=550, height=370');">新浪微博</a>
         <a href="/vote?topic_id={{ topic.id }}" class="J_topicVote">喜欢</a>
         {% if current_user and current_user.uid == topic.author_id %}
-        <a href="/t/edit/{{ topic.id }}" class="fr">编辑主题</a>
+        <a href="/t/edit/{{ topic.id }}" class="fr">编辑话题</a>
         {% endif %}
         <span class="hits fr mr10">{{ topic.hits or 0 }} 次点击</span>
     </div>
@@ -211,7 +211,7 @@
     </div>
     <div class="ui-content">
         <div class="status status-topic"> <strong><a href="/u/{{ user_info.username }}/topics">{{ user_info.counter.topics }}</a></strong> 
-            主题
+            话题
         </div>
         <div class="status status-reply">
             <strong><a href="/u/{{ user_info.username }}/replies">{{ user_info.counter.replies }}</a></strong> 

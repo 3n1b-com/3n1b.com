@@ -3,7 +3,7 @@
 {% block main %}
 <div class="topics container-box user-topics">
     <div class="ui-header">
-        <span class="bread-nav"><a href="/">叁年壹班</a> › {{ user_info.username }} › 收藏的主题列表</span>
+        <span class="bread-nav"><a href="/">叁年壹班</a> › {{ user_info.username }} › 收藏的话题列表</span>
     </div>
 
     <div class="ui-content">
@@ -48,7 +48,7 @@
 
             {% if favorites.page.total == 0 %}
         <div class="pl10 pr10">
-            <div class="alert mt20">该用户暂时还没有收藏过主题。</div>
+            <div class="alert mt20">该用户暂时还没有收藏过话题。</div>
         </div>
         {% endif %}
     </div>
@@ -71,7 +71,7 @@
     </div>
     <div class="ui-content">
         <div class="status status-topic"> <strong><a href="/u/{{ user_info.username }}/topics">{{ user_info.counter.topics }}</a></strong> 
-            主题
+            话题
         </div>
         <div class="status status-reply">
             <strong><a href="/u/{{ user_info.username }}/replies">{{ user_info.counter.replies }}</a></strong> 

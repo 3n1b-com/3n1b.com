@@ -15,7 +15,7 @@
         <div class="reply-item">
             <div class="main">
                 <span class="title">
-                    回复了 {{ reply.topic_author_username }} 创建的主题
+                    回复了 {{ reply.topic_author_username }} 创建的话题
                     <a href="/t/{{ reply.topic_id }}">{{ reply.topic_title }}</a>
                 </span>
                 <div class="content">{{ reply.content|markdown|content_process }}</div>
@@ -25,7 +25,7 @@
 
             {% if replies.page.total == 0 %}
         <div class="pl10 pr10">
-            <div class="alert mt20">该用户暂时还没有回复过主题。</div>
+            <div class="alert mt20">该用户暂时还没有回复过话题。</div>
         </div>
         {% endif %}
     </div>
@@ -50,7 +50,7 @@
     </div>
     <div class="ui-content">
         <div class="status status-topic"> <strong><a href="/u/{{ user_info.username }}/topics">{{ user_info.counter.topics }}</a></strong> 
-            主题
+            话题
         </div>
         <div class="status status-reply"> <strong><a href="/u/{{ user_info.username }}/replies">{{ user_info.counter.replies }}</a></strong> 
             回复

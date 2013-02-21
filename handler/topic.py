@@ -314,7 +314,7 @@ class CreateHandler(BaseHandler):
         # update toptic count of the node
         topic_count = node["topic_count"] + 1
         self.node_model.set_node_topic_count_by_node_slug(node_slug, topic_count)
-        
+
         # update reputation of topic author
         reputation = self.current_user["reputation"] or 0
         reputation = reputation - 5
@@ -356,7 +356,7 @@ class EditHandler(BaseHandler):
 
         if(not topic_info["author_id"] == self.current_user["uid"]):
             template_variables["errors"] = {}
-            template_variables["errors"]["invalid_permission"] = [u"没有权限修改该主题"]
+            template_variables["errors"]["invalid_permission"] = [u"没有权限修改该话题"]
             self.get(topic_id, template_variables)
             return
 
