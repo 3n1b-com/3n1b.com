@@ -29,7 +29,7 @@ CREATE TABLE `favorite` (
   `involved_reply_id` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `notification`
@@ -46,7 +46,7 @@ CREATE TABLE `notification` (
   `trigger_user_id` int(11) DEFAULT NULL,
   `occurrence_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `reply`
@@ -63,7 +63,7 @@ CREATE TABLE `reply` (
   `down_vote` int(11) DEFAULT NULL,
   `last_touched` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `topic`
@@ -87,7 +87,7 @@ CREATE TABLE `topic` (
   `down_vote` int(11) DEFAULT NULL,
   `last_touched` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 delimiter ;;
 CREATE TRIGGER `topic_delete_trigger` BEFORE DELETE ON `topic` FOR EACH ROW BEGIN
         DELETE FROM reply WHERE reply.topic_id = OLD.id;
@@ -165,6 +165,6 @@ CREATE TABLE `vote` (
   `trigger_user_id` int(11) DEFAULT NULL,
   `occurrence_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

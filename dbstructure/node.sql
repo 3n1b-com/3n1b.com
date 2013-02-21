@@ -15,7 +15,7 @@ CREATE TABLE `node` (
   `custom_style` text,
   `limit_reputation` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- 分享 --
 INSERT INTO `node` VALUES (1,'问与答', 'qna', '', '', '2013-01-22', '2013-01-22', 1, 0, '', 10000);

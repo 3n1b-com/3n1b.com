@@ -8,7 +8,7 @@ CREATE TABLE `plane` (
   `created` text,
   `updated` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `plane` VALUES (1,'分 享', '2013-01-23', '2013-01-23');
 INSERT INTO `plane` VALUES (2,'生 活', '2013-01-23', '2013-01-23');
