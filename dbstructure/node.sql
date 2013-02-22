@@ -23,8 +23,9 @@ INSERT INTO `node` VALUES (2,'分享发现', 'share', '', '', '2013-01-22', '201
 INSERT INTO `node` VALUES (3,'自言自语', 'autistic', '', '', '2013-01-22', '2013-01-22', 1, 0, '', 10000);
 INSERT INTO `node` VALUES (4,'随想', 'random', '', '', '2013-01-22', '2013-01-22', 1, 0, '', 10000);
 INSERT INTO `node` VALUES (5,'奇思妙想', 'ideas', '', '', '2013-01-22', '2013-01-22', 1, 0, '', 10000);
-INSERT INTO `node` VALUES (6,'团购分享', 'tuan', '', '', '2013-01-22', '2013-01-22', 2, 0, '', 10000);
+INSERT INTO `node` VALUES (49,'Top10', 'top10', '', '', '2013-01-22', '2013-01-22', 1, 0, '', 10000);
 -- 生活 --
+INSERT INTO `node` VALUES (6,'团购分享', 'tuan', '', '', '2013-01-22', '2013-01-22', 2, 0, '', 10000);
 INSERT INTO `node` VALUES (7,'阅读', 'reading', '', '', '2013-01-22', '2013-01-22', 2, 0, '', 10000);
 INSERT INTO `node` VALUES (8,'征友', 'date', '', '', '2013-01-22', '2013-01-22', 2, 0, '', 10000);
 INSERT INTO `node` VALUES (9,'跳蚤市场', 'second', '', '', '2013-01-22', '2013-01-22', 2, 0, '', 10000);
@@ -58,6 +59,7 @@ INSERT INTO `node` VALUES (33,'研究所', 'research', '', '', '2013-01-22', '20
 INSERT INTO `node` VALUES (34,'面经', 'interview', '', '', '2013-01-22', '2013-01-22', 5, 0, '', 10000);
 INSERT INTO `node` VALUES (35,'职场', 'career', '', '', '2013-01-22', '2013-01-22', 5, 0, '', 10000);
 INSERT INTO `node` VALUES (36,'内部推荐', 'recommendation', '', '', '2013-01-22', '2013-01-22', 5, 0, '', 10000);
+INSERT INTO `node` VALUES (50,'创业', 'startup', '', '', '2013-01-22', '2013-01-22', 5, 0, '', 10000);
 -- 城市 --
 INSERT INTO `node` VALUES (37,'北京', 'beijing', '', '', '2013-01-22', '2013-01-22', 6, 0, '', 10000);
 INSERT INTO `node` VALUES (38,'上海', 'shanghai', '', '', '2013-01-22', '2013-01-22', 6, 0, '', 10000);

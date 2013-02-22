@@ -282,8 +282,12 @@ class CreateHandler(BaseHandler):
         print "CreateHandler:post"
         template_variables = {}
 
-        # validate the fields
+        college_id = self.get_argument('c', "0")
+        node_slug = self.get_argument('n', "qna")
+        node = self.node_model.get_node_by_node_slug(node_slug)
+        college = self.college_model.get_college_by_college_id(college_id)
 
+        # validate the fields
         form = CreateForm(self)
 
         if not form.validate():
@@ -291,11 +295,6 @@ class CreateHandler(BaseHandler):
             return
 
         # continue while validate succeed
-
-        college_id = self.get_argument('c', "0")
-        node_slug = self.get_argument('n', "qna")
-        node = self.node_model.get_node_by_node_slug(node_slug)
-        college = self.college_model.get_college_by_college_id(college_id)
         
         topic_info = {
             "author_id": self.current_user["uid"],
