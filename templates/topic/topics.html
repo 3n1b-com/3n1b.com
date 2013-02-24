@@ -98,7 +98,7 @@
 <div class="nodes-cloud container-box mt10">
     <div class="fr"><a href="/nodes">浏览全部小组</a></div>
     <h4 class="title">热门导航</h4>
-    <ul>
+    <ul class="hot-nodes">
         {% for plane in planes %}
         <li>
             <label for="">{{ plane.name }}</label>
@@ -174,13 +174,23 @@
     </div>
 </div>
 {% endif %}
-<div class="sidebox container-box mt10 hot-nodes">
+<div class="sidebox container-box mt10 ">
     <div class="ui-header">
-        <span class="title">最热小组</span>
+        <span class="title">最热小组<div class="fr"><a href="/nodes">all</a></div></span>
     </div>
-    <div class="ui-content">
+    <div class="ui-content hot-nodes">
         {% for node in hot_nodes %}
         <a href="/node/{{ node.slug }}">{{ node.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+<div class="sidebox container-box mt10 ">
+    <div class="ui-header">
+        <span class="title">热门学校<div class="fr"><a href="/colleges">all</a></div></span>
+    </div>
+    <div class="ui-content hot-nodes">
+        {% for college in hot_colleges %}
+        <a href="/college/{{ college.id }}">{{ college.name }}</a>
         {% endfor %}
     </div>
 </div>
@@ -225,6 +235,8 @@
     </div>
 </div>
 #}
+
+{% if user_info.username == "gaolinjie" %}
 <div class="sidebox container-box mt10 community-status">
     <div class="ui-header">
         <span class="title">运行状态</span>
@@ -248,4 +260,6 @@
         </dl>
     </div>
 </div>
+{% endif %}
+
 {% endblock %}

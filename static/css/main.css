@@ -873,7 +873,7 @@ a.btn-small {
   -moz-border-radius: 5px / 5px;
   border-radius: 5px / 5px;
   display: inline-block;
-  padding: 3px 5px;
+  padding: 0px 5px;
   margin: 3px 0;
   background: #f3f3f3;
   color: #999;

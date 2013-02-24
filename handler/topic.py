@@ -67,7 +67,8 @@ class IndexHandler(BaseHandler):
         else:
             template_variables["active_page"] = tab      
         template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
-        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()        
         template_variables["gen_random"] = gen_random    
         notice_text = "暂时还没有话题，发出您的讨论吧。"
         if (tab == "college"):
