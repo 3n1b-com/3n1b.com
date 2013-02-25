@@ -49,6 +49,8 @@ class IndexHandler(BaseHandler):
             if(tab=="follows"):
                 template_variables["topics"] = self.follow_model.get_user_all_follow_topics(user_id = user_info["uid"], current_page = page)
         else:
+            if(tab=="college"):
+                self.redirect("/login?next=/?tab=college")
             if(tab=="interest"):
                 self.redirect("/login?next=/?tab=interest")
             if(tab=="follows"):
@@ -155,6 +157,8 @@ class ViewHandler(BaseHandler):
 
         template_variables["replies"] = self.reply_model.get_all_replies_by_topic_id(topic_id, current_page = page)
         template_variables["active_page"] = "topic"
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()  
 
         # update topic reply_count and hits
 
@@ -633,6 +637,7 @@ class MembersHandler(BaseHandler):
             template_variables["user_info"]["counter"] = {
             "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
             "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
+            "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
             "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
         }        
         template_variables["members"] = self.user_model.get_users_by_latest(num = 49)
@@ -640,6 +645,9 @@ class MembersHandler(BaseHandler):
         template_variables["gen_random"] = gen_random
         template_variables["active_page"] = "members"
         template_variables["wallpaper"] = self.get_wallpaper()
+        template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges() 
         self.render("topic/members.html", **template_variables)
 
 class NodesHandler(BaseHandler):
@@ -669,7 +677,8 @@ class NodesHandler(BaseHandler):
         template_variables["college"] = college
         template_variables["node_prefix"] = node_prefix
         template_variables["planes"] = self.plane_model.get_all_planes_with_nodes()
-        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()  
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()       
         template_variables["gen_random"] = gen_random 
         template_variables["active_page"] = "nodes"  
         template_variables["wallpaper"] = self.get_wallpaper()    
@@ -704,7 +713,8 @@ class CollegesHandler(BaseHandler):
         template_variables["college_prefix"] = college_prefix
         template_variables["college_postfix"] = college_postfix   
         template_variables["provinces"] = self.province_model.get_all_provinces_with_colleges()
-        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()        
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()         
         template_variables["gen_random"] = gen_random       
         template_variables["active_page"] = "colleges" 
         template_variables["wallpaper"] = self.get_wallpaper() 
