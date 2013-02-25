@@ -96,6 +96,8 @@ class NodeTopicsHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
             }
             user_college = self.college_model.get_college_by_college_name(user_info["collegename"])
             interest = self.interest_model.get_interest_info_by_user_id_and_node_id(user_info["uid"], current_node.id)
@@ -111,6 +113,8 @@ class NodeTopicsHandler(BaseHandler):
         if (wallpaper == ""):
             wallpaper = self.get_wallpaper()
         template_variables["wallpaper"] = wallpaper
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()
         self.render("topic/node_topics.html", **template_variables)
 
 class CollegeTopicsHandler(BaseHandler):
@@ -123,6 +127,8 @@ class CollegeTopicsHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
             }
         template_variables["topics"] = self.topic_model.get_all_topics_by_college_id(current_page = page, college_id = college_id)
         template_variables["college"] = self.college_model.get_college_by_college_id(college_id)
@@ -130,6 +136,8 @@ class CollegeTopicsHandler(BaseHandler):
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
         template_variables["wallpaper"] = self.get_wallpaper()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()
         self.render("topic/college_topics.html", **template_variables)
 
 class ViewHandler(BaseHandler):
@@ -143,6 +151,8 @@ class ViewHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
             }
         template_variables["gen_random"] = gen_random
         template_variables["topic"] = self.topic_model.get_topic_by_topic_id(topic_id)
@@ -270,6 +280,8 @@ class CreateHandler(BaseHandler):
             "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
             "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
             "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+            "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+            "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
         }
         template_variables["gen_random"] = gen_random
         college_id = self.get_argument('c', "0")
@@ -280,6 +292,8 @@ class CreateHandler(BaseHandler):
         template_variables["college"] = college
         template_variables["active_page"] = "topic"
         template_variables["wallpaper"] = self.get_wallpaper()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()
         self.render("topic/create.html", **template_variables)
 
     @tornado.web.authenticated
@@ -335,11 +349,15 @@ class EditHandler(BaseHandler):
             "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
             "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
             "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+            "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+            "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
         }
         template_variables["topic"] = self.topic_model.get_topic_by_topic_id(topic_id)
         template_variables["gen_random"] = gen_random
         template_variables["active_page"] = "topic"
         template_variables["wallpaper"] = self.get_wallpaper()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()
         self.render("topic/edit.html", **template_variables)
 
     @tornado.web.authenticated
@@ -397,6 +415,8 @@ class ProfileHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
             }
             if(current_user_info):
                 if(user_info["uid"] == current_user_info["uid"]):
@@ -483,11 +503,15 @@ class UserTopicsHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
             }
         template_variables["topics"] = self.topic_model.get_user_all_topics(user_info["uid"], current_page = page)
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
         template_variables["wallpaper"] = self.get_wallpaper()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()
         self.render("topic/user_topics.html", **template_variables)
 
 class UserRepliesHandler(BaseHandler):
@@ -504,11 +528,15 @@ class UserRepliesHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
             }
         template_variables["replies"] = self.reply_model.get_user_all_replies(user_info["uid"], current_page = page)
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
         template_variables["wallpaper"] = self.get_wallpaper()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()
         self.render("topic/user_replies.html", **template_variables)
 
 class UserFavoritesHandler(BaseHandler):
@@ -525,11 +553,15 @@ class UserFavoritesHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+                "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
             }
         template_variables["favorites"] = self.favorite_model.get_user_all_favorites(user_info["uid"], current_page = page)
         template_variables["active_page"] = "topic"
         template_variables["gen_random"] = gen_random
         template_variables["wallpaper"] = self.get_wallpaper()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()
         self.render("topic/user_favorites.html", **template_variables)
 
 class ReplyEditHandler(BaseHandler):
@@ -541,11 +573,15 @@ class ReplyEditHandler(BaseHandler):
             "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
             "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
             "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+            "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+            "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
         }
         template_variables["reply"] = self.reply_model.get_reply_by_reply_id(reply_id)
         template_variables["gen_random"] = gen_random
         template_variables["active_page"] = "topic"
         template_variables["wallpaper"] = self.get_wallpaper()
+        template_variables["hot_nodes"] = self.node_model.get_all_hot_nodes()
+        template_variables["hot_colleges"] = self.college_model.get_all_hot_colleges()
         self.render("topic/reply_edit.html", **template_variables)
 
     @tornado.web.authenticated
@@ -639,6 +675,7 @@ class MembersHandler(BaseHandler):
             "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
             "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
             "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
+            "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
         }        
         template_variables["members"] = self.user_model.get_users_by_latest(num = 49)
         template_variables["active_members"] = self.user_model.get_users_by_last_login(num = 49)
@@ -660,6 +697,7 @@ class NodesHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
         template_variables["status_counter"] = {
@@ -693,6 +731,7 @@ class CollegesHandler(BaseHandler):
                 "topics": self.topic_model.get_user_all_topics_count(user_info["uid"]),
                 "replies": self.reply_model.get_user_all_replies_count(user_info["uid"]),
                 "notifications": self.notification_model.get_user_unread_notification_count(user_info["uid"]),
+                "messages": self.message_model.get_user_unread_message_count(user_info["uid"]),
                 "favorites": self.favorite_model.get_user_favorite_count(user_info["uid"]),
             }
         template_variables["status_counter"] = {
