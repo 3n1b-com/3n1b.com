@@ -50,11 +50,11 @@ class IndexHandler(BaseHandler):
                 template_variables["topics"] = self.follow_model.get_user_all_follow_topics(user_id = user_info["uid"], current_page = page)
         else:
             if(tab=="college"):
-                self.redirect("/login?next=/?tab=college")
+                self.redirect("/register")
             if(tab=="interest"):
-                self.redirect("/login?next=/?tab=interest")
+                self.redirect("/register")
             if(tab=="follows"):
-                self.redirect("/login?next=/?tab=follows")
+                self.redirect("/register")
             template_variables["topics"] = self.topic_model.get_all_topics(current_page = page);
         template_variables["college"] = user_college
         template_variables["status_counter"] = {
