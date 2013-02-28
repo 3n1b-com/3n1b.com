@@ -684,9 +684,9 @@ a.btn-small {
 }
     .sidebox .ui-content .topic-item .title {
   font-weight: normal;
-  line-height: 21px;
+  line-height: 16px;
   color: #777;
-  margin: 0 0 10px 0;
+  margin: 0 0 12px 0;
   letter-spacing: 0;
 }
 
