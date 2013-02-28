@@ -190,6 +190,25 @@
 </div>
 <div class="sidebox container-box mt10 ">
     <div class="ui-header">
+        <span class="title">今日热议</span>
+    </div>
+    <div class="ui-content">
+        {% for topic in hot_topics %}
+        <div class="topic-item">          
+        <a href="/u/{{ topic.author_username }}">
+            <img src="/static/avatar/s_{{ topic.author_avatar or 'default.png' }}" alt="" class="avatar" />
+        </a>
+        <div class="main">
+            <div class="title">
+                <a href="/t/{{ topic.id }}#reply{{ topic.reply_count or 0 }}">{{ topic.title }}</a>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="sidebox container-box mt10 ">
+    <div class="ui-header">
         <span class="title">最热小组<div class="fr"><a href="/nodes">all</a></div></span>
     </div>
     <div class="ui-content hot-nodes">

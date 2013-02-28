@@ -123,7 +123,7 @@ class SettingAvatarHandler(BaseHandler):
 
         avatar_96x96 = avatar.resize((96, 96), Image.ANTIALIAS)
         avatar_48x48 = avatar.resize((48, 48), Image.ANTIALIAS)
-        avatar_32x32 = avatar.resize((32, 32), Image.ANTIALIAS)
+        avatar_32x32 = avatar.resize((24, 24), Image.ANTIALIAS)
         avatar_96x96.save("/srv/www/3n1b.com/static/avatar/b_%s.png" % avatar_name, "PNG")
         avatar_48x48.save("/srv/www/3n1b.com/static/avatar/m_%s.png" % avatar_name, "PNG")
         avatar_32x32.save("/srv/www/3n1b.com/static/avatar/s_%s.png" % avatar_name, "PNG")

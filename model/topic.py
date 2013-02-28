@@ -137,3 +137,11 @@ class TopicModel(Query):
         where = "topic.id = %s" % topic_id
         return self.where(where).data(topic_info).save()
 
+    def get_all_hot_topics(self):
+        where = "topic.reply_count > 0"
+        join = "LEFT JOIN user AS author_user ON topic.author_id = author_user.uid"
+        order = "topic.reply_count DESC"
+        field = "topic.*,\
+                author_user.avatar as author_avatar"
+        return self.where(where).join(join).order(order).field(field).limit(6).select()
+

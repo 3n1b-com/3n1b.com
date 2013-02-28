@@ -151,6 +151,9 @@
                     <a href="/u/{{ reply.author_username }}" class="reply-username">
                         <span class="username">{{ reply.author_username }}</span>
                     </a>
+                    <span class="collegename">
+                        <a href="/college/{{ topic.college_id }}">{{ topic.college_name }}</a>
+                    </span>
                     <span class="time">{{ reply.created|pretty_date }}</span>
                     {% if current_user and current_user.uid == reply.author_id %}
                     <a href="/reply/edit/{{ reply.id }}">编辑回复</a>
