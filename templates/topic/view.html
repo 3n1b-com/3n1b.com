@@ -152,7 +152,7 @@
                         <span class="username">{{ reply.author_username }}</span>
                     </a>
                     <span class="collegename">
-                        <a href="/college/{{ topic.college_id }}">{{ topic.college_name }}</a>
+                        <a href="/college/{{ reply.author_collegeid }}">{{ reply.author_collegename }}</a>
                     </span>
                     <span class="time">{{ reply.created|pretty_date }}</span>
                     {% if current_user and current_user.uid == reply.author_id %}

@@ -207,6 +207,7 @@ class ViewHandler(BaseHandler):
         reply_info = {
             "author_id": self.current_user["uid"],
             "topic_id": form.tid.data,
+            "college_id": self.current_user["college_id"],
             # "content": XssCleaner().strip(form.content.data),
             "content": form.content.data,
             "created": time.strftime('%Y-%m-%d %H:%M:%S'),

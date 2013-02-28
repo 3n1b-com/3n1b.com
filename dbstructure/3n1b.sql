@@ -56,6 +56,7 @@ CREATE TABLE `reply` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `topic_id` int(11) DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL,
+  `college_id` int(11) DEFAULT NULL,
   `content` text,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
