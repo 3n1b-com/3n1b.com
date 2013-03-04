@@ -203,11 +203,13 @@ class ViewHandler(BaseHandler):
             template_variables["errors"]["invalid_topic_info"] = [u"要回复的帖子不存在"]
             self.get(template_variables)
             return
-        
+
+        college = self.college_model.get_college_by_college_name(self.current_user["collegename"])
+
         reply_info = {
             "author_id": self.current_user["uid"],
             "topic_id": form.tid.data,
-            "college_id": self.current_user["college_id"],
+            "college_id": college["id"],
             # "content": XssCleaner().strip(form.content.data),
             "content": form.content.data,
             "created": time.strftime('%Y-%m-%d %H:%M:%S'),
