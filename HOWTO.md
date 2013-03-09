@@ -2,7 +2,7 @@ HOWTO deploy on Linode
 ======================
 
 ###Build Ubuntu 12.10 on Linode and access the server
-	$ ssh root@106.187.37.xxx
+	$ ssh root@106.187.xxx.xxx
 	# ssh to server
 	# if encounter 'Host key verification failed', just delete ~/.ssh/known_hosts file
 
